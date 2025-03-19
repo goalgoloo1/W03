@@ -4,12 +4,15 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D _rigid;
-    float velocityX;
+    float _velocityX;
 
+    // 아래는 조작감을 위해 조정해야할 변수
     [SerializeField] float _speed = 5f;
     [SerializeField] float _acceleration = 100f;
     [SerializeField] float _decceleration = 50f;
     [SerializeField] float _turnSpeed = 300f;
+
+    // 아래는 계산시 사용되는 값을 건드리지 말아야할 변수
     float _speedChange;
 
     private void Start()
@@ -20,7 +23,7 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-        velocityX = _rigid.linearVelocity.x;
+        _velocityX = _rigid.linearVelocity.x;
     }
 
     void Move()
@@ -32,7 +35,7 @@ public class PlayerMove : MonoBehaviour
         if (move != Vector2.zero)
         {
             // 반대 방향으로 이동 명령을 내리면 turnSpeed 적용
-            if (Mathf.Sign(move.x) != Mathf.Sign(velocityX))
+            if (Mathf.Sign(move.x) != Mathf.Sign(_velocityX))
             {
                 _speedChange = _turnSpeed * Time.unscaledDeltaTime;
             } // 같은 방향으로 이동 명령을 내리면 가속도 적용
@@ -46,7 +49,7 @@ public class PlayerMove : MonoBehaviour
            _speedChange = _decceleration * Time.unscaledDeltaTime;
         }
 
-        velocityX = Mathf.MoveTowards(velocityX, desiredVelocity.x, _speedChange);
-        _rigid.linearVelocityX = velocityX;
+        _velocityX = Mathf.MoveTowards(_velocityX, desiredVelocity.x, _speedChange);
+        _rigid.linearVelocityX = _velocityX;
     }
 }
