@@ -6,25 +6,27 @@ public class StageManager : MonoBehaviour
 {
     private GameManager _gameManager;
     
-    public Action onInitStageEvent;
-    public Action onPlayerDeathEvent;
-    public Action onPlayerSuccessEvent;
+    public Action OnInitStageEvent;
+    public Action OnPlayerDeathEvent;
+    public Action OnStageClearEvent;
     
-    public Action<RankType, float, int> onChangeCleanUIEvent;
+    public Action<RankType, float, int> OnChangeClearUIEvent;
+    public Func<RankType> GetCurrentFinalRankRankType;
     
     [Header("Stage Data")]
     private int _stageIndex;
     private int _coinCount;
-    
-    public float TotalTime {get; private set;}
-    public RankType CurrentFinalRank {get; private set;}
-    public float CurrentFinalScore {get; private set;}
+
+    private float _totalTime;
+    private RankType _currentFinalRank;
+    private float _currentFinalScore;
     
     private void Start()
     {
-        onInitStageEvent += InitStage;
+        OnInitStageEvent += InitStage;
+        GetCurrentFinalRankRankType += GetCurrentFinalRank;
         
-        onInitStageEvent?.Invoke();
+        OnInitStageEvent?.Invoke();
     }
 
     private void InitStage()
@@ -33,8 +35,8 @@ public class StageManager : MonoBehaviour
         _gameManager.ChangeStageManager(this);
 
         _stageIndex = _gameManager.SelectedStageNum;
-        CurrentFinalRank = _gameManager.StageDataList[_stageIndex].finlaRankType;
-        TotalTime = _gameManager.StageDataList[_stageIndex].finalTotalTime;
+        _currentFinalRank = _gameManager.StageDataList[_stageIndex].finlaRankType;
+        _totalTime = _gameManager.StageDataList[_stageIndex].finalTotalTime;
         
         Debug.Log($"INIT {_stageIndex} STAGE");
     }
@@ -46,8 +48,8 @@ public class StageManager : MonoBehaviour
 
     private void EndStage()
     {
-        CurrentFinalScore = GetFinalScore(CurrentFinalScore, _coinCount);
-        CurrentFinalRank = GetFinalRank(CurrentFinalScore);
+        _currentFinalScore = GetFinalScore(_currentFinalScore, _coinCount);
+        _currentFinalRank = GetFinalRank(_currentFinalScore);
         UpdateStageData();
     }
     
@@ -69,16 +71,21 @@ public class StageManager : MonoBehaviour
         // Calculate Final Rank
         return finalRank;
     }
+
+    private RankType GetCurrentFinalRank()
+    {
+        return _currentFinalRank;
+    }
     
     private void UpdateStageData()
     {
-        if (CurrentFinalScore < _gameManager.StageDataList[_stageIndex].finalTotalScore)
+        if (_currentFinalScore < _gameManager.StageDataList[_stageIndex].finalTotalScore)
         {
             return;
         }
         
-        _gameManager.StageDataList[_stageIndex].finalTotalScore = CurrentFinalScore;
-        _gameManager.StageDataList[_stageIndex].finlaRankType = CurrentFinalRank;
-        _gameManager.StageDataList[_stageIndex].finalTotalTime = TotalTime;
+        _gameManager.StageDataList[_stageIndex].finalTotalScore = _currentFinalScore;
+        _gameManager.StageDataList[_stageIndex].finlaRankType = _currentFinalRank;
+        _gameManager.StageDataList[_stageIndex].finalTotalTime = _totalTime;
     }
 }
