@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D _rigid;
-    Vector2 velocity;
+    float velocityX;
+
     [SerializeField] float _speed = 5f;
     [SerializeField] float _acceleration = 100f;
     [SerializeField] float _decceleration = 50f;
@@ -19,7 +20,7 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-        velocity = _rigid.linearVelocity;
+        velocityX = _rigid.linearVelocity.x;
     }
 
     void Move()
@@ -31,7 +32,7 @@ public class PlayerMove : MonoBehaviour
         if (move != Vector2.zero)
         {
             // 반대 방향으로 이동 명령을 내리면 turnSpeed 적용
-            if (Mathf.Sign(move.x) != Mathf.Sign(velocity.x))
+            if (Mathf.Sign(move.x) != Mathf.Sign(velocityX))
             {
                 _speedChange = _turnSpeed * Time.unscaledDeltaTime;
             } // 같은 방향으로 이동 명령을 내리면 가속도 적용
@@ -45,10 +46,7 @@ public class PlayerMove : MonoBehaviour
            _speedChange = _decceleration * Time.unscaledDeltaTime;
         }
 
-        velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, _speedChange);
-        //velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, 1000f);
-        _rigid.linearVelocity = velocity;
-
-        print(_rigid.linearVelocityX);
+        velocityX = Mathf.MoveTowards(velocityX, desiredVelocity.x, _speedChange);
+        _rigid.linearVelocityX = velocityX;
     }
 }

@@ -21,7 +21,7 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -39,7 +39,7 @@
                 {
                     "name": "up",
                     "id": "448866c1-7c3b-4373-b993-1cc031c93fd8",
-                    "path": "",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -50,7 +50,7 @@
                 {
                     "name": "down",
                     "id": "3c1920f3-3c04-4270-99b4-fa4ca9d218a1",
-                    "path": "",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -61,7 +61,7 @@
                 {
                     "name": "left",
                     "id": "0d6e50a6-375e-45c1-bb1e-2210fe5060b7",
-                    "path": "",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -72,7 +72,7 @@
                 {
                     "name": "right",
                     "id": "ae5a433a-6261-461f-8331-0203c4035c56",
-                    "path": "",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -88,6 +88,17 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "35a6e61a-caa3-4190-bfad-71b1848242a6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
