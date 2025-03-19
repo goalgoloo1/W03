@@ -12,7 +12,7 @@ public class ClearCanvas : MonoBehaviour
 
     private void Start()
     {
-        _stageManager = FindObjectOfType<StageManager>(); 
+        _stageManager = FindAnyObjectByType<StageManager>(); 
         
         stageListBtn.onClick.AddListener(OnClickStageListBtn);
         retryBtn.onClick.AddListener(OnClickRetryBtn);
