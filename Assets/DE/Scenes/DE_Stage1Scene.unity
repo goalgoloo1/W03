@@ -290,7 +290,7 @@ MonoBehaviour:
   totalTime: 0
   currentFinalRank: 0
   currentFinalScore: 0
-  clearCanvasPrefab: {fileID: 0}
+  clearCanvasPrefab: {fileID: 8043753736817227290, guid: 44ac4d1749923d74e82b6a04520120ad, type: 3}
   isPlayerDead: 0
   isPlayerSuccess: 0
 --- !u!4 &1428612288
