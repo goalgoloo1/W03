@@ -7,10 +7,11 @@ public class PlayerMove : MonoBehaviour
     float _velocityX;
 
     // 아래는 조작감을 위해 조정해야할 변수
-    [SerializeField] float _speed = 5f;
-    [SerializeField] float _acceleration = 100f;
-    [SerializeField] float _decceleration = 50f;
-    [SerializeField] float _turnSpeed = 300f;
+    [SerializeField] float _speed;
+    [SerializeField] float _acceleration;
+    [SerializeField] float _decceleration;
+    [SerializeField] float _turnSpeed;
+
 
     // 아래는 계산시 사용되는 값을 건드리지 말아야할 변수
     float _speedChange;

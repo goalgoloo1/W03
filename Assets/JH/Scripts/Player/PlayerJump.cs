@@ -6,15 +6,15 @@ public class PlayerJump : MonoBehaviour
     float _velocityY;
 
     Vector3 _colliderOffset = new Vector3(0.5f, 0);
-    int _groundLayer = 6;
+    const int _groundLayer = 6;
     float _groundLength = 0.53f;
     bool _onGround = true;
 
     // 아래는 조작감을 위해 조정해야할 변수
-    [SerializeField] float _jumpHeight = 5f;
-    [SerializeField] float _timeToJumpApex = 1f;   // 최고 높은 곳으로 가기까지 걸리는 시간??? 공부필요함
-    [SerializeField] float _upMoveMultiplier = 1f;
-    [SerializeField] float _downMoveMultiplier = 5f;
+    [SerializeField] float _jumpHeight;
+    [SerializeField] float _timeToJumpApex;   // 최고 높은 곳으로 가기까지 걸리는 시간??? 공부필요함
+    [SerializeField] float _upMoveMultiplier;
+    [SerializeField] float _downMoveMultiplier;
 
     // 아래는 계산시 사용되는 값을 건드리지 말아야할 변수
     float _jumpSpeed;
