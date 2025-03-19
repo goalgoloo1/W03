@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
+    PlayerGround _playerGround;
     Rigidbody2D _rigid;
     float _velocityY;
 
-    Vector3 _colliderOffset = new Vector3(0.5f, 0);
-    const int _groundLayer = 6;
-    float _groundLength = 0.53f;
-    bool _onGround = true;
+    bool _onGround;
 
     // 아래는 조작감을 위해 조정해야할 변수
+    [Header("점프")]
     [SerializeField] float _jumpHeight;
     [SerializeField] float _timeToJumpApex;   // 최고 높은 곳으로 가기까지 걸리는 시간??? 공부필요함
     [SerializeField] float _upMoveMultiplier;
@@ -23,32 +22,19 @@ public class PlayerJump : MonoBehaviour
 
     void Start()
     {
+        _playerGround = GetComponent<PlayerGround>();
         _rigid = GetComponent<Rigidbody2D>();
-
         InputManager.Instance.OnJumpEvent += Jump;
     }
     void Update()
     {
-        CheckGround();
         SetPhysics();
     }
 
     void FixedUpdate()
     {
+        _onGround = _playerGround.Ground;
         CalculateGravity();
-    }
-
-    void CheckGround()
-    {
-        _onGround = Physics2D.Raycast(transform.position + _colliderOffset, Vector2.down, _groundLength) || Physics2D.Raycast(transform.position - _colliderOffset, Vector2.down, _groundLength);
-    }
-
-    private void OnDrawGizmos()
-    {
-        //Draw the ground colliders on screen for debug purposes
-        if (_onGround) { Gizmos.color = Color.green; } else { Gizmos.color = Color.red; }
-        Gizmos.DrawLine(transform.position + _colliderOffset, transform.position + _colliderOffset + Vector3.down * _groundLength);
-        Gizmos.DrawLine(transform.position - _colliderOffset, transform.position - _colliderOffset + Vector3.down * _groundLength);
     }
 
     // 버튼을 누를 때 점프하는 행동
