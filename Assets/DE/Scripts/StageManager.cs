@@ -10,120 +10,75 @@ public class StageManager : MonoBehaviour
     public Action onPlayerDeathEvent;
     public Action onPlayerSuccessEvent;
     
+    public Action<RankType, float, int> onChangeCleanUIEvent;
+    
     [Header("Stage Data")]
-    public int stageIndex;
-    public int coinCount;
-    public float totalTime;
-
-    public RankType currentFinalRank;
-    public float currentFinalScore;
+    private int _stageIndex;
+    private int _coinCount;
     
-    [Header("Spawn Object")]
-    public ClearCanvas clearCanvasPrefab;
-    private ClearCanvas _clearCanvas;
-    
-    [Header("Test Boolean")]
-    public bool isPlayerDead;
-    private bool _isPlayerDeadPrev;
-    
-    public bool isPlayerSuccess;
-    private bool _isPlayerSuccessPrev;
+    public float TotalTime {get; private set;}
+    public RankType CurrentFinalRank {get; private set;}
+    public float CurrentFinalScore {get; private set;}
     
     private void Start()
     {
         onInitStageEvent += InitStage;
-        onPlayerDeathEvent += ResetStage;
-        onPlayerSuccessEvent += EndStage;
         
         onInitStageEvent?.Invoke();
     }
-    
-    public void Update()
-    {
-        if (!isPlayerSuccess)
-        {
-            totalTime += Time.unscaledDeltaTime;
-        }
-        
-        if (isPlayerDead != _isPlayerDeadPrev)
-        {
-            onPlayerDeathEvent?.Invoke();
-            _isPlayerDeadPrev = isPlayerDead;
-        }
-        
-        if (isPlayerSuccess != _isPlayerSuccessPrev)
-        {
-            onPlayerSuccessEvent?.Invoke();
-            _isPlayerSuccessPrev = isPlayerSuccess;
-        }
-    }
-    
+
     private void InitStage()
     {
-        _gameManager = GameManager.instance;
+        _gameManager = GameManager.Instance;
+        _gameManager.ChangeStageManager(this);
+
+        _stageIndex = _gameManager.SelectedStageNum;
+        CurrentFinalRank = _gameManager.StageDataList[_stageIndex].finlaRankType;
+        TotalTime = _gameManager.StageDataList[_stageIndex].finalTotalTime;
         
-        currentFinalRank = _gameManager.stageList.Stages[stageIndex].finlaRankType;
-        totalTime = _gameManager.stageList.Stages[stageIndex].finalTotalTime;
+        Debug.Log($"INIT {_stageIndex} STAGE");
     }
     
     public void ResetStage()
     {
-        _gameManager.LoadSceneWithIndex(stageIndex);
+        _gameManager.LoadSceneWithIndex(_stageIndex);
     }
 
     private void EndStage()
     {
-        currentFinalScore = GetFinalScore(currentFinalScore, coinCount);
-        currentFinalRank = GetFinalRank(currentFinalScore);
+        CurrentFinalScore = GetFinalScore(CurrentFinalScore, _coinCount);
+        CurrentFinalRank = GetFinalRank(CurrentFinalScore);
         UpdateStageData();
-        
-        _clearCanvas = Instantiate(clearCanvasPrefab);
     }
     
     public void ChangeToNextStage()
     {
-        _gameManager.LoadSceneWithIndex(stageIndex + 1);
+        _gameManager.LoadSceneWithIndex(_stageIndex + 1);
     }
 
     private float GetFinalScore(float time, int coinCount)
     {
         var score = 0;
-        // calculate TotalScore
+        // Calculate Total Score
         return score;
     }
 
     private RankType GetFinalRank(float score)
     {
         var finalRank = RankType.None;
-        
-        switch (score)
-        {
-            case 10:
-                finalRank = RankType.BRank;
-                break;
-            case 20:
-                finalRank = RankType.ARank;
-                break;
-            case 30:
-                finalRank = RankType.SRank;
-                break;
-            case 40:
-                finalRank = RankType.SSRank;
-                break;
-        }
-
+        // Calculate Final Rank
         return finalRank;
     }
     
     private void UpdateStageData()
     {
-        if (currentFinalScore < _gameManager.stageList.Stages[stageIndex].finalTotalScore)
+        if (CurrentFinalScore < _gameManager.StageDataList[_stageIndex].finalTotalScore)
         {
             return;
         }
         
-        _gameManager.stageList.Stages[stageIndex].finalTotalScore = currentFinalScore;
-        _gameManager.stageList.Stages[stageIndex].finlaRankType = currentFinalRank;
-        _gameManager.stageList.Stages[stageIndex].finalTotalTime = totalTime;
+        _gameManager.StageDataList[_stageIndex].finalTotalScore = CurrentFinalScore;
+        _gameManager.StageDataList[_stageIndex].finlaRankType = CurrentFinalRank;
+        _gameManager.StageDataList[_stageIndex].finalTotalTime = TotalTime;
     }
 }

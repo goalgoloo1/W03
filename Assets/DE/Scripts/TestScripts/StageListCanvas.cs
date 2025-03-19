@@ -9,7 +9,7 @@ public class StageListCanvas : MonoBehaviour
 
     private void Start()
     {
-        _gameManager = GameManager.instance;
+        _gameManager = GameManager.Instance;
         InitStageListCanvas();
     }
 
@@ -21,6 +21,6 @@ public class StageListCanvas : MonoBehaviour
     
     private void OnClickStageBtn(int index)
     {
-        GameManager.instance.OnSelectStageEvent?.Invoke(index);
+        GameManager.Instance.OnSelectStageEvent?.Invoke(index);
     }
 }
