@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using GameData;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
     // When selected stage UI
     public Action<int> OnSelectStageEvent;
     public int selectedStageNum { get; private set; }
+
+    public StageDataContainter.StageList stageList = new StageDataContainter.StageList();
 
     private void Awake()
     {
@@ -33,6 +36,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"LOAD SCENE : {index}");
         selectedStageNum = index;
-        SceneManager.LoadScene(index);
+        SceneManager.LoadScene(index + 1);
     }
 }

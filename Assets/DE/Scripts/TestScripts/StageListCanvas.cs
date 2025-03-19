@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScriptListCanvas : MonoBehaviour
+public class StageListCanvas : MonoBehaviour
 {
     private GameManager _gameManager;
     public Button stage0Btn;
@@ -15,8 +15,8 @@ public class ScriptListCanvas : MonoBehaviour
 
     private void InitStageListCanvas()
     {
-        stage0Btn.onClick.AddListener(() => OnClickStageBtn(1));
-        stage1Btn.onClick.AddListener(() => OnClickStageBtn(2));
+        stage0Btn.onClick.AddListener(() => OnClickStageBtn(0));
+        stage1Btn.onClick.AddListener(() => OnClickStageBtn(1));
     }
     
     private void OnClickStageBtn(int index)
