@@ -1,16 +1,38 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameManager instance;
+
+    // When selected stage UI
+    public Action<int> OnSelectStageEvent;
+    public int selectedStageNum { get; private set; }
+
+    private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
         
+        DontDestroyOnLoad(instance);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        OnSelectStageEvent += LoadSceneWithIndex;
+    }
+
+    public void LoadSceneWithIndex(int index)
+    {
+        Debug.Log($"LOAD SCENE : {index}");
+        selectedStageNum = index;
+        SceneManager.LoadScene(index);
     }
 }
