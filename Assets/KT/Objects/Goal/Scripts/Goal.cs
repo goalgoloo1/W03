@@ -9,9 +9,9 @@ public class Goal : MonoBehaviour
         {
             RankType rank = GameManager.Instance.StageManager.GetCurrentFinalRankRankType();
             float timer = GameManager.Instance.StageManager.GetTotalTimeFloat();
-            //int coinCount = GameManager.Instance.StageManager.GetCurrentFinalScoreFloat;
+            int coinCount = GameManager.Instance.StageManager.GetCoinCountInt();
 
-            //GameManager.StageManager.OnStageClearEvent?.Invoke(rank, timer, coinCount);
+            //GameManager.Instance.StageManager.OnStageClearEvent?.Invoke(rank, timer, coinCount);
         }
     }
 }

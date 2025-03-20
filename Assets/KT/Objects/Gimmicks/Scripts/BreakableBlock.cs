@@ -6,7 +6,7 @@ using UnityEngine;
 public class BreakableBlock : MonoBehaviour
 {
     Coroutine _coBreak;
-    WaitForSeconds wait = new WaitForSeconds(1.0f);
+    WaitForSeconds _wait = new WaitForSeconds(1.0f);
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -18,7 +18,7 @@ public class BreakableBlock : MonoBehaviour
 
     IEnumerator CoBreak()
     {
-        yield return wait;
+        yield return _wait;
 
         gameObject.SetActive(false);
         //Debug.Log("break");
