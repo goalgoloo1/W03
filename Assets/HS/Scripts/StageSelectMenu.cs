@@ -10,6 +10,14 @@ public class StageSelectMenu : MonoBehaviour
 
     private void Start()
     {
+        StageSelectMenuSequence();
+        Debug.Log("{GameManager.Instance.StageManager}");
+        // OnStageClearMenuEvent += StageClearSequence;
+        // OnStageClearMenuEvent?.Invoke();
+    }
+
+    private void StageSelectMenuSequence() 
+    {
         _stageFirstButton = GameObject.Find("StageFirstButton").GetComponent<Button>();
         _stageSecondButton = GameObject.Find("StageSecondButton").GetComponent<Button>();
         _stageThirdButton = GameObject.Find("StageThirdButton").GetComponent<Button>();
@@ -20,28 +28,22 @@ public class StageSelectMenu : MonoBehaviour
         _stageThirdButton.onClick.AddListener(StageThirdButtonClick);
         _stageFourthButton.onClick.AddListener(StageFourthButtonClick);
     }
-
     private void StageFirstButtonClick()
     {
-        //SceneManager.LoadScene("FirstScene"); 
-        Debug.Log("LoadFirstScene");
+        GameManager.Instance.OnSelectStageEvent?.Invoke(0);
     }
     private void StageSecondButtonClick()
     {
-        //SceneManager.LoadScene("FirstScene"); 
-
-        Debug.Log("Second");
+        GameManager.Instance.OnSelectStageEvent?.Invoke(1);
     }
     private void StageThirdButtonClick()
     {
-        //SceneManager.LoadScene("FirstScene"); 
+        GameManager.Instance.OnSelectStageEvent?.Invoke(2);
 
-        Debug.Log("Third");
     }
     private void StageFourthButtonClick()
     {
-        //SceneManager.LoadScene("FirstScene"); 
+        GameManager.Instance.OnSelectStageEvent?.Invoke(3);
 
-        Debug.Log("Fourth");
     }
 }
