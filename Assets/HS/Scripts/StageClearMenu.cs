@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using TMPro;
 using System;
+using Enums;
 
 public class StageClearMenu : MonoBehaviour
 {
@@ -21,14 +22,18 @@ public class StageClearMenu : MonoBehaviour
 
     private void Start()
     {
-        OnStageClearMenuEvent += StageClearSequence;
-        OnStageClearMenuEvent?.Invoke();
+
+        Debug.Log("{GameManager.Instance.StageManager}");
+        GameManager.Instance.StageManager.OnStageClearEvent += StageClearSequence;
+        // OnStageClearMenuEvent += StageClearSequence;
+        // OnStageClearMenuEvent?.Invoke();
 
     }
     
-    private async void StageClearSequence()
+    private async void StageClearSequence(RankType type, float time, int coinCount)
     {
         FindUIObjects();
+        ChangeClearUIText(type, time, coinCount);
 
         await Task.Delay(1000);
 
@@ -51,6 +56,14 @@ public class StageClearMenu : MonoBehaviour
         HideStageClearPanel();
 
     }
+
+    private void ChangeClearUIText(RankType type, float time, int coinCount)
+    {
+        _textRank.text = type.ToString();
+        _textScore.text = coinCount.ToString();
+        _textClearTime.text = time.ToString();
+    }
+
     private void FindUIObjects()
     {
         _canvasGroup = transform.Find("DarkPanel").GetComponent<CanvasGroup>();
