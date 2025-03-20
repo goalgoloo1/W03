@@ -12,6 +12,7 @@ public class Goal : MonoBehaviour
             int coinCount = GameManager.Instance.StageManager.GetCoinCountInt();
 
             //GameManager.Instance.StageManager.OnStageClearEvent?.Invoke(rank, timer, coinCount);
+            Debug.Log($"{rank} + {timer} + {coinCount}");
         }
     }
 }
