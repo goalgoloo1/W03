@@ -10,7 +10,7 @@ public class BreakableBlock : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Player") && _coBreak == null)
+        if (collision.transform.CompareTag("Player") && (_coBreak == null))
         {
             _coBreak = StartCoroutine(CoBreak());
         }

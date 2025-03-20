@@ -436,14 +436,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e18fe75a665c1846b343149f587191f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageList:
-    Stages:
-    - finalTotalScore: 10
-      finlaRankType: 1
-      finalTotalTime: 0
-    - finalTotalScore: 40
-      finlaRankType: 3
-      finalTotalTime: 0
+  StageDataList:
+  - {fileID: 11400000, guid: ab5bca372fc5c9b499ed570f80c2e803, type: 2}
+  - {fileID: 11400000, guid: ccf4360c0ef10af4c8dca97080c0fa83, type: 2}
 --- !u!1 &974153842
 GameObject:
   m_ObjectHideFlags: 0

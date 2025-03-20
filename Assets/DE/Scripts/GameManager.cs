@@ -1,30 +1,34 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using GameData;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-
-    // When selected stage UI
+    [Header("Manager")]
+    public static GameManager Instance;
+    public StageManager StageManager => Instance.StageManager;
+    private StageManager _stageManager;
+    
+    [Header("Action")]
     public Action<int> OnSelectStageEvent;
-    public int selectedStageNum { get; private set; }
-
-    public StageDataContainter.StageList stageList = new StageDataContainter.StageList();
-
+    
+    [Header("Properties")]
+    public int SelectedStageNum { get; private set; }
+    public List<StageData> StageDataList = new List<StageData>();
+    
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance != this)
+        else if (Instance != this)
         {
             Destroy(gameObject);
         }
         
-        DontDestroyOnLoad(instance);
+        DontDestroyOnLoad(Instance);
     }
 
     private void Start()
@@ -32,10 +36,15 @@ public class GameManager : MonoBehaviour
         OnSelectStageEvent += LoadSceneWithIndex;
     }
 
+    public void ChangeStageManager(StageManager newStageManager)
+    {
+        _stageManager = newStageManager;
+    }
+
     public void LoadSceneWithIndex(int index)
     {
         Debug.Log($"LOAD SCENE : {index}");
-        selectedStageNum = index;
+        SelectedStageNum = index;
         SceneManager.LoadScene(index + 1);
     }
 }
