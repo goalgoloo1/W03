@@ -16,17 +16,16 @@ public class MovableBlock : MonoBehaviour
         _endPoint = transform.parent.GetComponentInChildren<EndPoint>().transform;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.transform.CompareTag("Player") && (_coMove == null))
+        if (collider.CompareTag("Player") && (_coMove == null))
         {
-            _coMove = StartCoroutine(CoMove(collision.transform, _startPoint.position, _endPoint.position, _moveTime));
+            _coMove = StartCoroutine(CoMove(_startPoint.position, _endPoint.position, _moveTime));
         }
     }
 
-    IEnumerator CoMove(Transform target, Vector3 start, Vector3 end, float moveTime)
+    IEnumerator CoMove(Vector3 start, Vector3 end, float moveTime)
     {
-        target.SetParent(transform);
         float current = 0;
         float percent = 0;
 
@@ -46,7 +45,6 @@ public class MovableBlock : MonoBehaviour
             _startPoint.position = end;
             _endPoint.position = start;
 
-            target.SetParent(null);
             _coMove = null;
         }
     }

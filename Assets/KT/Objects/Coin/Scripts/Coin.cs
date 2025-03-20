@@ -6,7 +6,7 @@ public class Coin : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            //GameManager.Instance.StageManager.OnGetCoinEvent?.Invoke();
+            GameManager.Instance.StageManager.OnGetCoinEvent?.Invoke();
             gameObject.SetActive(false);
         }
     }
