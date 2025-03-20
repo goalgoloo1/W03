@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("Manager")]
     public static GameManager Instance;
-    public StageManager StageManager => Instance.StageManager;
+    public StageManager StageManager => Instance._stageManager;
     private StageManager _stageManager;
     
     [Header("Action")]
