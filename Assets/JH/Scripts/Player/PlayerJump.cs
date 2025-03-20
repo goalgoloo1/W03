@@ -28,24 +28,25 @@ public class PlayerJump : MonoBehaviour
     }
     void Update()
     {
-        SetPhysics();
+        _onGround = _playerGround.OnGround;
     }
 
     void FixedUpdate()
     {
-        _onGround = _playerGround.OnGround;
         CalculateGravity();
+        SetPhysics();
+        Jump();
     }
 
     // 버튼을 누를 때 점프하는 행동
     void Jump()
     {
-        if (!_onGround) return;
+        if (!_onGround || !InputManager.Instance.Jump) return;
 
         ///
         /// 이부분 코드 맞는지 검토 필요
         ///
-        _velocityY = _rigid.linearVelocity.y;
+        _velocityY = _rigid.linearVelocityY;
         _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * _rigid.gravityScale * _jumpHeight);
         // 올라가는 탈것 등에 있어서 y축으로 올라가고 있다면 그것을 뺀 만큼만 점프
         if (_velocityY > 0f)
@@ -55,11 +56,13 @@ public class PlayerJump : MonoBehaviour
         // 내려가는 탈것 등에 있어서 y축으로 내려가고 있다면 그것을 뺀 만큼만 점프
         else if (_velocityY < 0f)
         {
-            _jumpSpeed += Mathf.Abs(_rigid.linearVelocity.y);
+            _jumpSpeed += Mathf.Abs(_rigid.linearVelocityY);
         }
 
         _velocityY += _jumpSpeed;
         _rigid.linearVelocityY = _velocityY;
+
+        InputManager.Instance.Jump = false;
     }
 
     // 캐릭터의 Y축에 따라 중력 조절

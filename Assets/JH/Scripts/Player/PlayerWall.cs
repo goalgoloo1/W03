@@ -29,7 +29,7 @@ public class PlayerWall : MonoBehaviour
         if (_onLeftWall) { Gizmos.color = Color.green; } else { Gizmos.color = Color.red; }
         Gizmos.DrawLine(transform.position + _colliderOffset, transform.position + _colliderOffset + Vector3.left * _wallLength);
         Gizmos.DrawLine(transform.position - _colliderOffset, transform.position - _colliderOffset + Vector3.left * _wallLength);
-        
+
         // 오른쪽 벽에 닿았는지 기즈모로 표현
         if (_onRightWall) { Gizmos.color = Color.green; } else { Gizmos.color = Color.red; }
         Gizmos.DrawLine(transform.position + _colliderOffset, transform.position + _colliderOffset + Vector3.right * _wallLength);

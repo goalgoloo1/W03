@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
     public Vector2 Move => _move;
     Vector2 _move;
 
-    public bool Jump => _jump;
+    public bool Jump { get { return _jump; } set { _jump = value; } }
     bool _jump;
 
     private void Awake()
@@ -27,11 +27,7 @@ public class InputManager : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        //_jump = value.isPressed;
-        //if (_jump)
-        //{
-            OnJumpEvent?.Invoke();
-        //    _jump = false;
-        //}
+        _jump = value.isPressed;
+
     }
 }

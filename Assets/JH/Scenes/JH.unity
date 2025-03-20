@@ -854,7 +854,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1253,11 +1253,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1078261617307687167, guid: 384aab271db0ded489ffb748f5d5e94e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.92
+      value: 14.61
       objectReference: {fileID: 0}
     - target: {fileID: 1078261617307687167, guid: 384aab271db0ded489ffb748f5d5e94e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6
+      value: 4.11
       objectReference: {fileID: 0}
     - target: {fileID: 1078261617307687167, guid: 384aab271db0ded489ffb748f5d5e94e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1295,13 +1295,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6479852933028875241, guid: 384aab271db0ded489ffb748f5d5e94e, type: 3}
-      propertyPath: _airDeceleration
-      value: 35
+    - target: {fileID: 1159072696960163986, guid: 384aab271db0ded489ffb748f5d5e94e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 6792155278898965594, guid: 384aab271db0ded489ffb748f5d5e94e, type: 3}
-      propertyPath: m_Interpolate
-      value: 0
+    - target: {fileID: 7445602573375806299, guid: 384aab271db0ded489ffb748f5d5e94e, type: 3}
+      propertyPath: _downMoveMultiplier
+      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

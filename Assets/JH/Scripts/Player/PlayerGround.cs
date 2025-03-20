@@ -6,9 +6,9 @@ public class PlayerGround : MonoBehaviour
     const int _groundLayer = 1 << 6;
     float _groundLength = 0.53f;
     public bool OnGround => _onGround;
-    bool _onGround;
+    bool _onGround = true;
 
-    void Update()
+    void FixedUpdate()
     {
         CheckGround();
     }
@@ -16,7 +16,6 @@ public class PlayerGround : MonoBehaviour
     void CheckGround()
     {
         _onGround = Physics2D.Raycast(transform.position + _colliderOffset, Vector2.down, _groundLength, _groundLayer) || Physics2D.Raycast(transform.position - _colliderOffset, Vector2.down, _groundLength, _groundLayer);
-        print(LayerMask.GetMask("Ground"));
     }
 
     void OnDrawGizmos()
