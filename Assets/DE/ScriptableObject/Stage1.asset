@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageIndex: 1
   finalTotalScore: 0
-  finlaRankType: 4
+  finlaRankType: 1
   finalTotalTime: 0
