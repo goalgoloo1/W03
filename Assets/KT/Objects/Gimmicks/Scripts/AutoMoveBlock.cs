@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class MovableBlock : MonoBehaviour
+public class AutoMoveBlock : MonoBehaviour
 {
     Transform _startPoint;
     Transform _endPoint;
@@ -14,15 +14,8 @@ public class MovableBlock : MonoBehaviour
     {
         _startPoint = transform.parent.GetComponentInChildren<StartPoint>().transform;
         _endPoint = transform.parent.GetComponentInChildren<EndPoint>().transform;
-    }
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        //if (collider.CompareTag("Player") && (_coMove == null))
-        if (_coMove == null)
-        {
-            _coMove = StartCoroutine(CoMove(_startPoint.localPosition, _endPoint.localPosition, _moveTime));
-        }
+        _coMove = StartCoroutine(CoMove(_startPoint.localPosition, _endPoint.localPosition, _moveTime));
     }
 
     IEnumerator CoMove(Vector3 start, Vector3 end, float moveTime)
@@ -46,7 +39,8 @@ public class MovableBlock : MonoBehaviour
             _startPoint.localPosition = end;
             _endPoint.localPosition = start;
 
-            _coMove = null;
+            StopCoroutine(_coMove);
+            _coMove = StartCoroutine(CoMove(_startPoint.localPosition, _endPoint.localPosition, _moveTime));
         }
     }
 }
