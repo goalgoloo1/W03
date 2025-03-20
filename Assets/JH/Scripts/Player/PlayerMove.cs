@@ -79,6 +79,5 @@ public class PlayerMove : MonoBehaviour
         //_velocityX = Mathf.MoveTowards(_velocityX, desiredX, _speedChange);
         _velocityX = desiredX;
         _rigid.linearVelocityX = _velocityX;
-
     }
 }

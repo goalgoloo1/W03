@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
@@ -38,10 +39,22 @@ public class PlayerJump : MonoBehaviour
         Jump();
     }
 
+    Coroutine _coDelayJumpfalse;
+
     // 버튼을 누를 때 점프하는 행동
     void Jump()
     {
-        if (!_onGround || !InputManager.Instance.Jump) return;
+        if (!_onGround || !InputManager.Instance.Jump)
+        {
+            //InputManager.Instance.Jump = false;
+            if (_coDelayJumpfalse == null)
+            {
+                _coDelayJumpfalse = StartCoroutine(CoDelayJumpFalse());
+            }
+            
+            return;
+        }
+            
 
         ///
         /// 이부분 코드 맞는지 검토 필요
@@ -63,6 +76,13 @@ public class PlayerJump : MonoBehaviour
         _rigid.linearVelocityY = _velocityY;
 
         InputManager.Instance.Jump = false;
+    }
+
+    IEnumerator CoDelayJumpFalse()
+    {
+        yield return new WaitForSeconds(0.2f);
+        InputManager.Instance.Jump = false;
+        _coDelayJumpfalse = null;
     }
 
     // 캐릭터의 Y축에 따라 중력 조절
