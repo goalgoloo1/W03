@@ -9,11 +9,14 @@ public class StageManager : MonoBehaviour
     // When stage started
     public Action OnInitStageEvent;
     
+    // When stage started
+    public Action OnGetCoinEvent;
+    
     // When player died
     public Action OnPlayerDeathEvent;
     
     // When player succeed current stage
-    public Action OnStageClearEvent;
+    public Action<RankType, float, int> OnStageClearEvent;
 
     public Func<float> GetTotalTimeFloat;
     public Func<int> GetCoinCountInt;
@@ -31,7 +34,6 @@ public class StageManager : MonoBehaviour
     {
         // Action
         OnInitStageEvent += InitStage;
-        OnStageClearEvent += EndStage;
         
         // Func
         GetTotalTimeFloat += GetTotalTime;
@@ -60,6 +62,7 @@ public class StageManager : MonoBehaviour
 
     private void EndStage()
     {
+        // Update in stage
         _currentFinalScore = GetFinalScore(_currentFinalScore, _coinCount);
         _currentFinalRank = GetFinalRank(_currentFinalScore);
         UpdateStageData();
