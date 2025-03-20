@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private StageManager _stageManager;
     
     [Header("Action")]
+    public Action OnClickNewGameBtnEvent;
+    public Action OnClickExitBtnEvent;
     public Action<int> OnSelectStageEvent;
     
     [Header("Properties")]
