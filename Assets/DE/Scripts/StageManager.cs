@@ -29,7 +29,7 @@ public class StageManager : MonoBehaviour
     
     private RankType _currentFinalRank;
     private float _currentFinalScore;
-
+    
     private void Start()
     {
         // Action
