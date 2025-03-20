@@ -439,6 +439,8 @@ MonoBehaviour:
   StageDataList:
   - {fileID: 11400000, guid: ab5bca372fc5c9b499ed570f80c2e803, type: 2}
   - {fileID: 11400000, guid: ccf4360c0ef10af4c8dca97080c0fa83, type: 2}
+  - {fileID: 11400000, guid: ffcf0209a35ca7143921fd7ac23e03a2, type: 2}
+  - {fileID: 11400000, guid: 3eb8bcffde5f3b2429d137031dfd16a8, type: 2}
 --- !u!1 &974153842
 GameObject:
   m_ObjectHideFlags: 0
