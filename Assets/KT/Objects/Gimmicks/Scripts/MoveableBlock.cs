@@ -18,7 +18,8 @@ public class MovableBlock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Player") && (_coMove == null))
+        //if (collider.CompareTag("Player") && (_coMove == null))
+        if (_coMove == null)
         {
             _coMove = StartCoroutine(CoMove(_startPoint.position, _endPoint.position, _moveTime));
         }
