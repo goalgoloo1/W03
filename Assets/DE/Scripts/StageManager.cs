@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Enums;
+using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class StageManager : MonoBehaviour
     // When player succeed current stage
     public Action<RankType, float, int> OnStageClearEvent;
 
+    // When player click clear UI buttons
+    public Action OnReturnToMainSceneEvent;
+    public Action OnRetryStageEvent;
+    public Action OnPlayNextStageEvent;
+
     public Func<float> GetTotalTimeFloat;
     public Func<int> GetCoinCountInt;
     public Func<RankType> GetCurrentFinalRankRankType;
@@ -27,7 +33,6 @@ public class StageManager : MonoBehaviour
     private int _stageIndex;
     private float _totalTime;
     private int _coinCount;
-    
     private RankType _currentFinalRank;
     private float _currentFinalScore;
     
@@ -38,6 +43,10 @@ public class StageManager : MonoBehaviour
         OnGetCoinEvent += UpdateScore;
         OnPlayerDeathEvent += ResetStage;
         OnStageClearEvent += EndStage;
+
+        OnReturnToMainSceneEvent += ChangeToMainScene;
+        OnRetryStageEvent += ResetStage;
+        OnPlayNextStageEvent += ChangeToNextStage;
         
         // Func
         GetTotalTimeFloat += GetTotalTime;
@@ -69,7 +78,7 @@ public class StageManager : MonoBehaviour
         Debug.Log($"INIT {_stageIndex} STAGE");
     }
     
-    public void ResetStage()
+    private void ResetStage()
     {
         _gameManager.LoadSceneWithIndex(_stageIndex);
     }
@@ -79,7 +88,12 @@ public class StageManager : MonoBehaviour
         _isStageClear = true;
     }
     
-    public void ChangeToNextStage()
+    private void ChangeToMainScene()
+    {
+        _gameManager.LoadSceneWithIndex(0);
+    }
+    
+    private void ChangeToNextStage()
     {
         _gameManager.LoadSceneWithIndex(_stageIndex + 1);
     }
