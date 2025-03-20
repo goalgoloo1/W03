@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class GameManager : MonoBehaviour
 {
     [Header("Manager")]
@@ -11,8 +12,6 @@ public class GameManager : MonoBehaviour
     private StageManager _stageManager;
     
     [Header("Action")]
-    public Action OnClickNewGameBtnEvent;
-    public Action OnClickExitBtnEvent;
     public Action<int> OnSelectStageEvent;
     
     [Header("Properties")]
@@ -42,16 +41,16 @@ public class GameManager : MonoBehaviour
     {
         _stageManager = newStageManager;
     }
-
-    public void LoadMainScene()
+    
+    public void LoadStageListScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void LoadSceneWithIndex(int index)
     {
         Debug.Log($"LOAD SCENE : {index}");
         SelectedStageNum = index;
-        SceneManager.LoadScene(index + 1);
+        SceneManager.LoadScene(index + 2);
     }
 }

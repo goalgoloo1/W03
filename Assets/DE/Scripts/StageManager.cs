@@ -90,7 +90,7 @@ public class StageManager : MonoBehaviour
     
     private void ChangeToMainScene()
     {
-        _gameManager.LoadMainScene();
+        _gameManager.LoadStageListScene();
     }
     
     private void ChangeToNextStage()

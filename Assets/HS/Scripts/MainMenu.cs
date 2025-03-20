@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class MainMenu : MonoBehaviour
 
     private void NewGameButtonClick()
     {
-        //SceneManager.LoadScene("FirstScene"); 
+        SceneManager.LoadScene(1);
         Debug.Log("NewGame is started!!!");
     }
     private void ExitButtonClick()
