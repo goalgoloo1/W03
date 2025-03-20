@@ -3,22 +3,22 @@ using UnityEngine.UI;
 
 public class StageSelectMenu : MonoBehaviour
 {
-    Button StageFirstButton;
-    Button StageSecondButton;
-    Button StageThirdButton;
-    Button StageFourthButton;
+    Button _stageFirstButton;
+    Button _stageSecondButton;
+    Button _stageThirdButton;
+    Button _stageFourthButton;
 
     private void Start()
     {
-        StageFirstButton = GameObject.Find("StageFirstButton").GetComponent<Button>();
-        StageSecondButton = GameObject.Find("StageSecondButton").GetComponent<Button>();
-        StageThirdButton = GameObject.Find("StageThirdButton").GetComponent<Button>();
-        StageFourthButton = GameObject.Find("StageFourthButton").GetComponent<Button>();
+        _stageFirstButton = GameObject.Find("StageFirstButton").GetComponent<Button>();
+        _stageSecondButton = GameObject.Find("StageSecondButton").GetComponent<Button>();
+        _stageThirdButton = GameObject.Find("StageThirdButton").GetComponent<Button>();
+        _stageFourthButton = GameObject.Find("StageFourthButton").GetComponent<Button>();
 
-        StageFirstButton.onClick.AddListener(StageFirstButtonClick);
-        StageSecondButton.onClick.AddListener(StageSecondButtonClick);
-        StageThirdButton.onClick.AddListener(StageThirdButtonClick);
-        StageFourthButton.onClick.AddListener(StageFourthButtonClick);
+        _stageFirstButton.onClick.AddListener(StageFirstButtonClick);
+        _stageSecondButton.onClick.AddListener(StageSecondButtonClick);
+        _stageThirdButton.onClick.AddListener(StageThirdButtonClick);
+        _stageFourthButton.onClick.AddListener(StageFourthButtonClick);
     }
 
     private void StageFirstButtonClick()
