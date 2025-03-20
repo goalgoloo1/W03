@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2757223977028289358}
   - component: {fileID: 6792155278898965594}
   - component: {fileID: 4031149850667216767}
+  - component: {fileID: 2422942272715688759}
   - component: {fileID: 6479852933028875241}
   - component: {fileID: 7445602573375806299}
   m_Layer: 2
@@ -161,7 +162,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 2
+  m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -175,6 +176,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7000bbc75f57f748ba1ac6e6ad83da3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2422942272715688759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159072696960163986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630e36d9b81cc4145b85f49539047b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6479852933028875241
@@ -194,7 +207,7 @@ MonoBehaviour:
   _groundDeceleration: 60
   _groundTurnSpeed: 80
   _airAcceleration: 90
-  _airDeceleration: 60
+  _airDeceleration: 35
   _airTurnSpeed: 60
 --- !u!114 &7445602573375806299
 MonoBehaviour:

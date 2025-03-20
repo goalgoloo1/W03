@@ -33,7 +33,7 @@ public class PlayerJump : MonoBehaviour
 
     void FixedUpdate()
     {
-        _onGround = _playerGround.Ground;
+        _onGround = _playerGround.OnGround;
         CalculateGravity();
     }
 

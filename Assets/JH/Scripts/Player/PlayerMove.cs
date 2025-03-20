@@ -40,9 +40,9 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _onGround = _playerGround.Ground;
-        Move();
+        _onGround = _playerGround.OnGround;
         _velocityX = _rigid.linearVelocity.x;
+        Move();
     }
 
     void Move()
