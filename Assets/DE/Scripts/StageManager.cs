@@ -31,7 +31,7 @@ public class StageManager : MonoBehaviour
     private RankType _currentFinalRank;
     private float _currentFinalScore;
     
-    private void Start()
+    private void Awake()
     {
         // Action
         OnInitStageEvent += InitStage;
