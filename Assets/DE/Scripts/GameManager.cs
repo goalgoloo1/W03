@@ -41,6 +41,11 @@ public class GameManager : MonoBehaviour
         _stageManager = newStageManager;
     }
 
+    public void LoadMainScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void LoadSceneWithIndex(int index)
     {
         Debug.Log($"LOAD SCENE : {index}");

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Enums;
-using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
@@ -34,6 +33,7 @@ public class StageManager : MonoBehaviour
     private float _totalTime = 0;
     private int _coinCount = 0;
     private RankType _currentFinalRank;
+    private bool _isLastStage;
     
     private void Awake()
     {
@@ -72,6 +72,7 @@ public class StageManager : MonoBehaviour
 
         _stageIndex = _gameManager.SelectedStageNum;
         _currentFinalRank = _gameManager.StageDataList[_stageIndex].FinalRankType;
+        _isLastStage = _stageIndex == _gameManager.StageDataList.Count - 1;
         
         Debug.Log($"INIT {_stageIndex} STAGE");
     }
@@ -89,11 +90,17 @@ public class StageManager : MonoBehaviour
     
     private void ChangeToMainScene()
     {
-        _gameManager.LoadSceneWithIndex(0);
+        _gameManager.LoadMainScene();
     }
     
     private void ChangeToNextStage()
     {
+        if (_isLastStage)
+        {
+            Debug.Log("IT'S THE LAST STAGE!");
+            return;
+        }
+        
         _gameManager.LoadSceneWithIndex(_stageIndex + 1);
     }
     
@@ -127,6 +134,7 @@ public class StageManager : MonoBehaviour
 
     private void UpdateStageData()
     {
+        Debug.Log((int)_currentFinalRank < (int)_gameManager.StageDataList[_stageIndex].FinalRankType);
         if (_currentFinalRank < _gameManager.StageDataList[_stageIndex].FinalRankType)
         {
             return;
