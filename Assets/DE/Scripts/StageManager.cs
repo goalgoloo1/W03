@@ -23,25 +23,38 @@ public class StageManager : MonoBehaviour
     public Func<RankType> GetCurrentFinalRankRankType;
     
     [Header("Stage Data")]
+    private bool _isStageClear;
     private int _stageIndex;
     private float _totalTime;
     private int _coinCount;
     
     private RankType _currentFinalRank;
     private float _currentFinalScore;
-
+    
     private void Start()
     {
         // Action
         OnInitStageEvent += InitStage;
         OnGetCoinEvent += UpdateScore;
+        OnPlayerDeathEvent += ResetStage;
+        OnStageClearEvent += EndStage;
         
         // Func
         GetTotalTimeFloat += GetTotalTime;
         GetCoinCountInt += GetCoinCount;
         GetCurrentFinalRankRankType += GetCurrentFinalRank;
         
+        // Initialize stage
         OnInitStageEvent?.Invoke();
+    }
+
+    private void Update()
+    {
+        // Start timer
+        if (!_isStageClear)
+        {
+            _totalTime += Time.unscaledDeltaTime;
+        }
     }
 
     private void InitStage()
@@ -51,7 +64,7 @@ public class StageManager : MonoBehaviour
 
         _stageIndex = _gameManager.SelectedStageNum;
         _currentFinalRank = _gameManager.StageDataList[_stageIndex].finlaRankType;
-        _totalTime = _gameManager.StageDataList[_stageIndex].finalTotalTime;
+        _totalTime = 0;
         
         Debug.Log($"INIT {_stageIndex} STAGE");
     }
@@ -59,6 +72,11 @@ public class StageManager : MonoBehaviour
     public void ResetStage()
     {
         _gameManager.LoadSceneWithIndex(_stageIndex);
+    }
+
+    private void EndStage(RankType type, float time, int coinCount)
+    {
+        _isStageClear = true;
     }
     
     public void ChangeToNextStage()
