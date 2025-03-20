@@ -5,23 +5,28 @@ using TMPro;
 
 public class StageClearMenu : MonoBehaviour
 {
-    CanvasGroup canvasGroup;
-    RectTransform clearPanelRect;
+    CanvasGroup _canvasGroup;
+    RectTransform _clearPanelRect;
+    TextMeshProUGUI _textRank;
+    TextMeshProUGUI _textScore;
+    TextMeshProUGUI _textClearTime;
 
 
-    float introPosX = 500; //px
-    float outroPosX = 1210; //px
-    float tweenDuration = 0.3f;
+    float _introPosX = 500; //px
+    float _outroPosX = 1210; //px
+    float _tweenDuration = 0.3f;
 
     private async void Start()
     {
-        canvasGroup = transform.Find("DarkPanel").GetComponent<CanvasGroup>();
-
-        clearPanelRect = transform.Find("ClearPanel").GetComponent<RectTransform>();
+        UIObjectFind();
 
         await Task.Delay(1000);
 
-        IntroClearPanel();
+        IntroStageClearPanel();
+
+        await Task.Delay(1000);
+
+        StageClearTime();
 
         await Task.Delay(1000);
 
@@ -31,35 +36,59 @@ public class StageClearMenu : MonoBehaviour
 
         ScaleRank();
 
-        await Task.Delay(2000);
+        await Task.Delay(3000);
 
         OutroClearPanel();
     }
-    private void IntroClearPanel()
+    private void UIObjectFind()
     {
-        Debug.Log("IntroClearPanel");
-        canvasGroup.DOFade(0.5f, tweenDuration).SetUpdate(true);
-        clearPanelRect.DOAnchorPosX(introPosX, tweenDuration).SetUpdate(true);
+        _canvasGroup = transform.Find("DarkPanel").GetComponent<CanvasGroup>();
+        _clearPanelRect = transform.Find("ClearPanel").GetComponent<RectTransform>();
+
+        _textRank = GameObject.Find("Rank").GetComponent<TextMeshProUGUI>();
+        _textRank.gameObject.SetActive(false);
+
+        _textScore = GameObject.Find("Score").GetComponent<TextMeshProUGUI>();
+        _textScore.gameObject.SetActive(false);
+
+        _textClearTime = GameObject.Find("ClearTime").GetComponent<TextMeshProUGUI>();
+        _textClearTime.gameObject.SetActive(false);
+
+
+    }
+    private void IntroStageClearPanel()
+    {
+        Debug.Log("IntroStageClearPanel");
+        _canvasGroup.DOFade(0.5f, _tweenDuration).SetUpdate(true);
+        _clearPanelRect.DOAnchorPosX(_introPosX, _tweenDuration).SetUpdate(true);
     }
 
     private void OutroClearPanel()
     {
         Debug.Log("OutroClearPanel");
-        canvasGroup.DOFade(0, tweenDuration).SetUpdate(true);
-        clearPanelRect.DOAnchorPosX(outroPosX, tweenDuration).SetUpdate(true);
+        _canvasGroup.DOFade(0, _tweenDuration).SetUpdate(true);
+        _clearPanelRect.DOAnchorPosX(_outroPosX, _tweenDuration).SetUpdate(true);
+        _textRank.gameObject.SetActive(false); 
+    }
+    private void StageClearTime()
+    {
+        Debug.Log("클리어 시간: 00:01:44");
+        _textClearTime.gameObject.SetActive(true);
+
     }
 
     private void ScoreScroll()
     {
-        // score 스크롤링 효과
-        Debug.Log("Score Scrolling......");
+        // score 스크롤링 효과 0.1초.
+        Debug.Log("Score Scrolling......2만점 !!");
+        _textScore.gameObject.SetActive(true);
+
+        // 클리어시간 활성화
     }
 
-    private void ScaleRank() 
+    private void ScaleRank()
     {
-        // rank가 스탬프처럼 나오도록 효과 
-        Debug.Log("SSS Rank!!!");
+        _textRank.gameObject.SetActive(true);
     }
-
     
 }
