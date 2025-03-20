@@ -32,6 +32,7 @@ public class StageManager : MonoBehaviour
     
     private void Start()
     {
+        
         // Action
         OnInitStageEvent += InitStage;
         OnGetCoinEvent += UpdateScore;
