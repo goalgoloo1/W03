@@ -29,12 +29,11 @@ public class StageManager : MonoBehaviour
     public Func<RankType> GetCurrentFinalRankRankType;
     
     [Header("Stage Data")]
-    private bool _isStageClear;
+    private bool _isStageClear = false;
     private int _stageIndex;
-    private float _totalTime;
-    private int _coinCount;
+    private float _totalTime = 0;
+    private int _coinCount = 0;
     private RankType _currentFinalRank;
-    private float _currentFinalScore;
     
     private void Awake()
     {
@@ -56,7 +55,7 @@ public class StageManager : MonoBehaviour
         // Initialize stage
         OnInitStageEvent?.Invoke();
     }
-
+    
     private void Update()
     {
         // Start timer
@@ -72,8 +71,7 @@ public class StageManager : MonoBehaviour
         _gameManager.ChangeStageManager(this);
 
         _stageIndex = _gameManager.SelectedStageNum;
-        _currentFinalRank = _gameManager.StageDataList[_stageIndex].finlaRankType;
-        _totalTime = 0;
+        _currentFinalRank = _gameManager.StageDataList[_stageIndex].FinalRankType;
         
         Debug.Log($"INIT {_stageIndex} STAGE");
     }
@@ -86,6 +84,7 @@ public class StageManager : MonoBehaviour
     private void EndStage(RankType type, float time, int coinCount)
     {
         _isStageClear = true;
+        UpdateStageData();
     }
     
     private void ChangeToMainScene()
@@ -100,34 +99,41 @@ public class StageManager : MonoBehaviour
     
     private void UpdateScore()
     {
-        _currentFinalScore += 10;
         _coinCount++; 
+        _currentFinalRank = SetFinalRank(_coinCount);
     }
 
-    private float GetFinalScore(float time, int coinCount)
-    {
-        var score = 0;
-        // Calculate Total Score
-        return score;
-    }
-
-    private RankType GetFinalRank(float score)
+    private RankType SetFinalRank(int coin)
     {
         var finalRank = RankType.None;
-        // Calculate Final Rank
+        switch (coin)
+        {
+            case 0:
+                finalRank = RankType.BRank;
+                break;
+            case 1:
+                finalRank = RankType.ARank;
+                break;
+            case 2:
+                finalRank = RankType.SRank;
+                break;
+            case 3:
+                finalRank = RankType.SSRank;
+                break;
+        }
+        
         return finalRank;
     }
 
     private void UpdateStageData()
     {
-        if (_currentFinalScore < _gameManager.StageDataList[_stageIndex].finalTotalScore)
+        if (_currentFinalRank < _gameManager.StageDataList[_stageIndex].FinalRankType)
         {
             return;
         }
         
-        _gameManager.StageDataList[_stageIndex].finalTotalScore = _currentFinalScore;
-        _gameManager.StageDataList[_stageIndex].finlaRankType = _currentFinalRank;
-        _gameManager.StageDataList[_stageIndex].finalTotalTime = _totalTime;
+        _gameManager.StageDataList[_stageIndex].FinalRankType = _currentFinalRank;
+        _gameManager.StageDataList[_stageIndex].FinalTotalTime = _totalTime;
     }
     
     private float GetTotalTime()

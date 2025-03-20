@@ -4,8 +4,8 @@ using Enums;
 [CreateAssetMenu(fileName = "StageData", menuName = "Scriptable Objects/StageData")]
 public class StageData : ScriptableObject
 {
-    public int stageIndex;
-    public float finalTotalScore;
-    public RankType finlaRankType;
-    public float finalTotalTime;
+    public int StageIndex;
+    public float FinalTotalScore;
+    public RankType FinalRankType;
+    public float FinalTotalTime;
 }
