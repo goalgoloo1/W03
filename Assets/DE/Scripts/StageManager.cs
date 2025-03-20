@@ -9,7 +9,7 @@ public class StageManager : MonoBehaviour
     // When stage started
     public Action OnInitStageEvent;
     
-    // When stage started
+    // When player get coin
     public Action OnGetCoinEvent;
     
     // When player died
@@ -34,6 +34,7 @@ public class StageManager : MonoBehaviour
     {
         // Action
         OnInitStageEvent += InitStage;
+        OnGetCoinEvent += UpdateScore;
         
         // Func
         GetTotalTimeFloat += GetTotalTime;
@@ -59,18 +60,16 @@ public class StageManager : MonoBehaviour
     {
         _gameManager.LoadSceneWithIndex(_stageIndex);
     }
-
-    private void EndStage()
-    {
-        // Update in stage
-        _currentFinalScore = GetFinalScore(_currentFinalScore, _coinCount);
-        _currentFinalRank = GetFinalRank(_currentFinalScore);
-        UpdateStageData();
-    }
     
     public void ChangeToNextStage()
     {
         _gameManager.LoadSceneWithIndex(_stageIndex + 1);
+    }
+    
+    private void UpdateScore()
+    {
+        _currentFinalScore += 10;
+        _coinCount++; 
     }
 
     private float GetFinalScore(float time, int coinCount)

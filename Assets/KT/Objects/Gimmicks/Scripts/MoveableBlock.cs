@@ -5,22 +5,22 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovableBlock : MonoBehaviour
 {
-    Vector3 _startPos;
-    Vector3 _endPos;
+    Transform _startPoint;
+    Transform _endPoint;
     float _moveTime = 1f;
     Coroutine _coMove;
 
     void Start()
     {
-        _startPos = transform.parent.GetComponentInChildren<StartPoint>().transform.position;
-        _endPos = transform.parent.GetComponentInChildren<EndPoint>().transform.position;
+        _startPoint = transform.parent.GetComponentInChildren<StartPoint>().transform;
+        _endPoint = transform.parent.GetComponentInChildren<EndPoint>().transform;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.transform.CompareTag("Player") && (_coMove == null))
+        if (collider.CompareTag("Player") && (_coMove == null))
         {
-            _coMove = StartCoroutine(CoMove(_startPos, _endPos, _moveTime));
+            _coMove = StartCoroutine(CoMove(_startPoint.position, _endPoint.position, _moveTime));
         }
     }
 
@@ -42,8 +42,9 @@ public class MovableBlock : MonoBehaviour
         if (percent >= 1)
         {
             //위치 바꾸기 -> 다시 호출 되었을 때 뒤로 돌아감 
-            _startPos = end;
-            _endPos = start;
+            _startPoint.position = end;
+            _endPoint.position = start;
+
             _coMove = null;
         }
     }
