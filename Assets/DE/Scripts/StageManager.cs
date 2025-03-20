@@ -6,33 +6,37 @@ public class StageManager : MonoBehaviour
 {
     private GameManager _gameManager;
     
+    // When stage started
     public Action OnInitStageEvent;
+    
+    // When player died
     public Action OnPlayerDeathEvent;
+    
+    // When player succeed current stage
     public Action OnStageClearEvent;
-    
-    public Action<RankType, float, int> OnChangeClearUIEvent;
-    
-    public Func<RankType> GetCurrentFinalRankRankType;
+
     public Func<float> GetTotalTimeFloat;
-    public Func<float> GetCurrentFinalScoreFloat;
+    public Func<int> GetCoinCountInt;
+    public Func<RankType> GetCurrentFinalRankRankType;
     
     [Header("Stage Data")]
     private int _stageIndex;
-    private int _coinCount;
-
-    private RankType _currentFinalRank;
     private float _totalTime;
-    private float _currentFinalScore;
+    private int _coinCount;
     
+    private RankType _currentFinalRank;
+    private float _currentFinalScore;
+
     private void Start()
     {
         // Action
         OnInitStageEvent += InitStage;
+        OnStageClearEvent += EndStage;
         
         // Func
-        GetCurrentFinalRankRankType += GetCurrentFinalRank;
         GetTotalTimeFloat += GetTotalTime;
-        GetCurrentFinalScoreFloat += GetCurrentFinalScore;
+        GetCoinCountInt += GetCoinCount;
+        GetCurrentFinalRankRankType += GetCurrentFinalRank;
         
         OnInitStageEvent?.Invoke();
     }
@@ -92,18 +96,18 @@ public class StageManager : MonoBehaviour
         _gameManager.StageDataList[_stageIndex].finalTotalTime = _totalTime;
     }
     
-    private RankType GetCurrentFinalRank()
-    {
-        return _currentFinalRank;
-    }
-    
     private float GetTotalTime()
     {
         return _totalTime;
     }
     
-    private float GetCurrentFinalScore()
+    private int GetCoinCount()
     {
-        return _currentFinalScore;
+        return _coinCount;
+    }
+    
+    private RankType GetCurrentFinalRank()
+    {
+        return _currentFinalRank;
     }
 }

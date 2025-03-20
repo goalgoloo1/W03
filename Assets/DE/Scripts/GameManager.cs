@@ -15,8 +15,6 @@ public class GameManager : MonoBehaviour
     
     [Header("Properties")]
     public int SelectedStageNum { get; private set; }
-    
-    [Header("Stage Data")]
     public List<StageData> StageDataList = new List<StageData>();
     
     private void Awake()
