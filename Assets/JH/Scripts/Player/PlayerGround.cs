@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class PlayerGround : MonoBehaviour
 {
+    PlayerDash _playerDash;
+
     Vector3 _colliderOffset = new Vector3(0.5f, 0);
     const int _groundLayer = 1 << 6;
     float _groundLength = 0.53f;
     public bool OnGround => _onGround;
     bool _onGround = true;
+
+    void Start()
+    {
+        _playerDash = GetComponent<PlayerDash>();
+    }
 
     void FixedUpdate()
     {
@@ -16,6 +23,10 @@ public class PlayerGround : MonoBehaviour
     void CheckGround()
     {
         _onGround = Physics2D.Raycast(transform.position + _colliderOffset, Vector2.down, _groundLength, _groundLayer) || Physics2D.Raycast(transform.position - _colliderOffset, Vector2.down, _groundLength, _groundLayer);
+        if (_onGround)
+        {
+            _playerDash.HasDashed = false;
+        }
     }
 
     void OnDrawGizmos()

@@ -6,6 +6,7 @@ public class PlayerJump : MonoBehaviour
 {
     PlayerGround _playerGround;
     PlayerWall _playerWall;
+    PlayerDash _playerDash;
     Rigidbody2D _rigid;
     Vector2 _velocity;
 
@@ -32,6 +33,7 @@ public class PlayerJump : MonoBehaviour
     {
         _playerGround = GetComponent<PlayerGround>();
         _playerWall = GetComponent<PlayerWall>();
+        _playerDash = GetComponent<PlayerDash>();
         _rigid = GetComponent<Rigidbody2D>();
         InputManager.Instance.OnJumpEvent += Jump;
     }
@@ -206,8 +208,8 @@ public class PlayerJump : MonoBehaviour
     
     void SetPhysics()
     {
-        // 플레이어가 공중에서 벽을 잡고 있을 때 중력 0
-        if (_playerWall.OnHoldWall && !_playerGround.OnGround)
+        // 플레이어가 공중에서 벽을 잡고 있을 때 중력 0 또는 대쉬중일 때 중력 0 
+        if ((_playerWall.OnHoldWall && !_playerGround.OnGround) || _playerDash.OnDash)
         {
             _rigid.gravityScale = 0;
             return;
