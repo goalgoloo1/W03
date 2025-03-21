@@ -26,6 +26,7 @@ public class PlayerGround : MonoBehaviour
         if (_onGround)
         {
             _playerDash.HasDashed = false;
+            _playerDash.EndDash = false;
         }
     }
 

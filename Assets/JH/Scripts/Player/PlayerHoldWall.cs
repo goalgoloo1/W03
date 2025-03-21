@@ -5,6 +5,7 @@ public class PlayerHoldWall : MonoBehaviour
 {
     Rigidbody2D _rigid;
     PlayerWall _playerWall;
+    PlayerDash _playerDash;
     Vector2 _velocity;
 
     [Header("º®")]
@@ -16,6 +17,7 @@ public class PlayerHoldWall : MonoBehaviour
     {
         _rigid = GetComponent<Rigidbody2D>();
         _playerWall = GetComponent<PlayerWall>();
+        _playerDash = GetComponent<PlayerDash>();
     }
 
     void FixedUpdate()
@@ -48,15 +50,15 @@ public class PlayerHoldWall : MonoBehaviour
 
     void WallSlide()
     {
-        _velocity = _rigid.linearVelocity;
-        _velocity.y = -_slideSpeed;
-        _rigid.linearVelocity = _velocity;
+        //_velocity = _rigid.linearVelocity;
+        //_velocity.y = -_slideSpeed;
+        //_rigid.linearVelocity = _velocity;
     }
 
     void Hold()
     {
         if (!InputManager.Instance.CanMove) return;
-            
+        _playerDash.EndDash = false;
         _playerWall.OnHoldWall = true;
 
         _velocity = _rigid.linearVelocity;

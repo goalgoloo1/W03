@@ -10,6 +10,8 @@ public class PlayerDash : MonoBehaviour
     bool _hasDashed;
     public bool OnDash { get {  return _onDash; } set { _onDash = value; } }
     bool _onDash;
+    public bool EndDash { get { return _endDash; } set { _endDash = value; } }
+    bool _endDash;
 
     [SerializeField] float _dashSpeed;
     [SerializeField] float _dashCoolDown;
@@ -43,6 +45,7 @@ public class PlayerDash : MonoBehaviour
         yield return new WaitForSeconds(_dashCoolDown);
         OnDash = false;
         InputManager.Instance.CanMove = true;
+        _endDash = true;
     }
 }
 

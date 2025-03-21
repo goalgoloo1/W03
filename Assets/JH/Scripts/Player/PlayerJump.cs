@@ -18,10 +18,18 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] float _timeToJumpApex;   // 최고 높은 곳으로 가기까지 걸리는 시간??? 공부필요함
     [SerializeField] float _upMoveMultiplier;
     [SerializeField] float _downMoveMultiplier;
+
+    [Header("벽 점프")]
     [SerializeField] float _wallJumpXSpeed;
     [SerializeField] float _wallJumpMultiplier;
     [SerializeField] float _wallStillJumpMultiplier;
+    [SerializeField] float _wallJumpCannotMoveDuration;
 
+    [Header("대쉬")]
+    [Tooltip("대쉬 후 땅에 닿거나 벽을 잡을 때 까지 높일 중력 값")] [SerializeField] float _endDashGravity;
+
+    [Header("기타")]
+    [SerializeField] float _speedLimit;
 
 
     // 아래는 계산시 사용되는 값을 건드리지 말아야할 변수
@@ -102,7 +110,7 @@ public class PlayerJump : MonoBehaviour
         /// 이부분 코드 맞는지 검토 필요
         ///
         StopCoroutine(DisableMovement(0));
-        StartCoroutine(DisableMovement(.1f));
+        StartCoroutine(DisableMovement(_wallJumpCannotMoveDuration));
 
         _velocity = _rigid.linearVelocity;
 
@@ -204,6 +212,10 @@ public class PlayerJump : MonoBehaviour
         {
             _gravityMultiplier = _defaultGravityScale;
         }
+        // y축의 속도가 너무 빠르거나 느리지 않게 제한
+        if (Mathf.Abs(_rigid.linearVelocityY) > 30)
+            print(_rigid.linearVelocityY);
+        _rigid.linearVelocityY = Mathf.Clamp(_rigid.linearVelocityY, -_speedLimit, _speedLimit);
     }
     
     void SetPhysics()
@@ -215,6 +227,15 @@ public class PlayerJump : MonoBehaviour
             return;
         }
         float newGravity = -2 * (_jumpHeight) / (_timeToJumpApex * _timeToJumpApex);
-        _rigid.gravityScale = newGravity / Physics2D.gravity.y * _gravityMultiplier;
+
+        // Dash를 공중으로 하는 경우 너무 높이까지 가서 어색함. _endDashGravity로 땅에 닿거나 벽에 닿을 때 까지 중력을 높임
+        if (_playerDash.EndDash)
+        {
+            _rigid.gravityScale = _endDashGravity;
+        }
+        else
+        {
+            _rigid.gravityScale = newGravity / Physics2D.gravity.y * _gravityMultiplier;
+        }
     }
 }
