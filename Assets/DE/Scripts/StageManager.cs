@@ -18,7 +18,7 @@ public class StageManager : MonoBehaviour
     public Action OnRetryStageEvent;
     public Action OnPlayNextStageEvent;
 
-    // Return starge data
+    // Return stage data
     public Func<float> GetTotalTimeFloat;
     public Func<int> GetCoinCountInt;
     public Func<RankType> GetCurrentFinalRankRankType;
@@ -71,6 +71,8 @@ public class StageManager : MonoBehaviour
         _isLastStage = _stageIndex == _gameManager.StageDataList.Count - 1;
         
         Debug.Log($"INIT {_stageIndex} STAGE");
+
+        StartCoroutine(_gameManager.CameraManager.DeactivateTransitionImage());
     }
     
     private void ResetStageWhenDied()
@@ -86,7 +88,7 @@ public class StageManager : MonoBehaviour
     
     private void ResetStage()
     {
-        _gameManager.LoadSceneWithIndex(_stageIndex);
+        _gameManager.LoadStageScene(_stageIndex);
     }
 
     private void EndStage(RankType type, float time, int coinCount)
@@ -108,7 +110,7 @@ public class StageManager : MonoBehaviour
             return;
         }
         
-        _gameManager.LoadSceneWithIndex(_stageIndex + 1);
+        _gameManager.LoadSceneWithTransition(_stageIndex + 1);
     }
     
     private void UpdateScore()

@@ -1,8 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 public class GameManager : MonoBehaviour
 {
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _cameraManager = FindAnyObjectByType<CameraManager>();
-        OnSelectStageEvent += LoadSceneWithIndex;
+        OnSelectStageEvent += LoadSceneWithTransition;
     }
 
     public void ChangeStageManager(StageManager newStageManager)
@@ -49,11 +49,21 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-
-    public void LoadSceneWithIndex(int index)
+    
+    public void LoadStageScene(int index)
     {
-        Debug.Log($"LOAD SCENE : {index}");
         SelectedStageNum = index;
         SceneManager.LoadScene(index + 2);
+    }
+
+    public void LoadSceneWithTransition(int index)
+    {
+        StartCoroutine(CoLoadSceneWithIndex(index));
+    }
+    
+    private IEnumerator CoLoadSceneWithIndex(int index)
+    {
+        yield return StartCoroutine(CameraManager.ActivateTransitionImage());
+        LoadStageScene(index);
     }
 }
