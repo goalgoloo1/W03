@@ -29,14 +29,13 @@ public class StageClearMenu : MonoBehaviour
 
     private void Start()
     {
-        //StageClearSequence(); PS: for Debugging
-
         FindUIObjects();
-        
-        
+
+        _cts = new CancellationTokenSource();
+
+        //StageClearSequence(); PS: for Debugging
         GameManager.Instance.StageManager.OnStageClearEvent += StageClearSequence;
         
-        _cts = new CancellationTokenSource();
     }
 
     private void OnDestroy()
@@ -123,6 +122,7 @@ public class StageClearMenu : MonoBehaviour
     
     private void ShowStageClearPanel()
     {
+
         _canvasGroup.DOFade(0.5f, _tweenDuration).SetUpdate(true);
         _clearPanelRect.DOAnchorPosX(_introPosX, _tweenDuration).SetUpdate(true);
     }
