@@ -15,6 +15,12 @@ public class InputManager : MonoBehaviour
     public bool Jump { get { return _jump; } set { _jump = value; } }
     bool _jump;
 
+    public bool Hold => _hold;
+    bool _hold;
+
+    public bool CanMove { get { return _canMove; } set { _canMove = value; } }
+    bool _canMove = true;
+
     private void Awake()
     {
         _instance = this;
@@ -29,5 +35,10 @@ public class InputManager : MonoBehaviour
     {
         _jump = value.isPressed;
 
+    }
+
+    void OnHold(InputValue value)
+    {
+        _hold = value.isPressed;
     }
 }

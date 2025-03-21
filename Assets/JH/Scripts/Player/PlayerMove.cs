@@ -4,12 +4,14 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     PlayerGround _playerGround;
+    PlayerWall _playerWall;
     Rigidbody2D _rigid;
     float _velocityX;
 
     bool _onGround;
     Vector2 move;
     float desiredX;
+    
 
     // 아래는 조작감을 위해 조정해야할 변수
     [Header("속도")]
@@ -34,6 +36,7 @@ public class PlayerMove : MonoBehaviour
     private void Start()
     {
         _playerGround = GetComponent<PlayerGround>();
+        _playerWall = GetComponent<PlayerWall>();
         _rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -51,6 +54,8 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
+        if (!InputManager.Instance.CanMove) return;
+        if (_playerWall.OnHoldWall) return;
         //_velocityX = _rigid.linearVelocityX;
 
         //_acceleration = _onGround ? _groundAcceleration : _airAcceleration;

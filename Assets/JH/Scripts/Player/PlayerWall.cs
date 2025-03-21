@@ -11,6 +11,8 @@ public class PlayerWall : MonoBehaviour
     bool _onLeftWall;
     public bool OnRightWall => _onRightWall;
     bool _onRightWall;
+    public bool OnHoldWall { get { return _onHoldWall; } set { _onHoldWall = value; } }
+    bool _onHoldWall;
 
     void Update()
     {
