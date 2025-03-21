@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class JumpSpring : MonoBehaviour
 {
-    float _jumpPower = 50f;
+    [SerializeField] float _jumpPower = 50f;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -9,7 +9,7 @@ public class BreakableBlock : MonoBehaviour
     PolygonCollider2D _polygonColl;
     
     Coroutine _coBreak;
-    WaitForSeconds _wait = new WaitForSeconds(1.0f);
+    [SerializeField] float _breakDelay;
 
     private void Start()
     {
@@ -28,13 +28,13 @@ public class BreakableBlock : MonoBehaviour
 
     IEnumerator CoBreak()
     {
-        yield return _wait;
+        yield return new WaitForSeconds(_breakDelay);
 
         _polygonColl.enabled = false;
         _body.SetActive(false);
         //Debug.Log("break");
 
-        yield return _wait;
+        yield return new WaitForSeconds(_breakDelay);
         _polygonColl.enabled = true;
         _body.SetActive(true);
 

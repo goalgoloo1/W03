@@ -8,7 +8,7 @@ public class FallableBlock : MonoBehaviour
     Rigidbody2D _rigid;
 
     Coroutine _coFall;
-    WaitForSeconds _wait = new WaitForSeconds(1.0f);
+    [SerializeField] float _fallDelay;
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class FallableBlock : MonoBehaviour
 
     IEnumerator CoFall()
     {
-        yield return _wait;
+        yield return new WaitForSeconds(_fallDelay);
         _rigid.constraints = RigidbodyConstraints2D.None;
         _rigid.constraints = RigidbodyConstraints2D.FreezePositionX;
         _rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
