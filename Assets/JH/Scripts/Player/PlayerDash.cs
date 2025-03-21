@@ -5,6 +5,7 @@ public class PlayerDash : MonoBehaviour
 {
     Rigidbody2D _rigid;
     Vector2 _velocity;
+    PlayerMove _playerMove;
 
     public bool HasDashed { get { return _hasDashed; } set { _hasDashed = value; } }
     bool _hasDashed;
@@ -19,6 +20,7 @@ public class PlayerDash : MonoBehaviour
     void Start()
     {
         _rigid = GetComponent<Rigidbody2D>();
+        _playerMove = GetComponent<PlayerMove>();
     }
     void FixedUpdate()
     {
@@ -33,14 +35,24 @@ public class PlayerDash : MonoBehaviour
 
         Debug.Log("Dash!");
         _hasDashed = true;
+        OnDash = true;
         StartCoroutine(CoDashWait());
         _rigid.linearVelocity = Vector2.zero;
-        _rigid.linearVelocity += InputManager.Instance.Move.normalized * _dashSpeed;
+
+        // input 움직임 이 매우 적으면 마지막으로 바라본 좌우 방향으로 대쉬 사용
+        if (InputManager.Instance.Move.magnitude < Utility.SideInputThreshold)
+        {
+            _rigid.linearVelocity += new Vector2(_playerMove.Direction, 0) * _dashSpeed;
+        }
+        // input 움직임이 크면 그 방향으로 대쉬
+        else
+        {
+            _rigid.linearVelocity += InputManager.Instance.Move.normalized * _dashSpeed;
+        }
     }
 
     IEnumerator CoDashWait()
     {
-        OnDash = true;
         InputManager.Instance.CanMove = false;
         yield return new WaitForSeconds(_dashCoolDown);
         OnDash = false;
