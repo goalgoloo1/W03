@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Stage3
   m_EditorClassIdentifier: 
   StageIndex: 3
-  FinalTotalScore: 0
-  FinalRankType: 1
+  FinalCoinCount: 0
+  FinalRankType: 0
   FinalTotalTime: 0

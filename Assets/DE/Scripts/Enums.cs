@@ -3,7 +3,7 @@ namespace Enums
 {
     public enum RankType
     {
-        None,
+        Unranked,
         BRank,
         ARank,
         SRank, 
