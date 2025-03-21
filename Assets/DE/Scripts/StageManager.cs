@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Enums;
 
@@ -6,16 +7,10 @@ public class StageManager : MonoBehaviour
 {
     private GameManager _gameManager;
     
-    // When stage started
+    // When player 
     public Action OnInitStageEvent;
-    
-    // When player get coin
     public Action OnGetCoinEvent;
-    
-    // When player died
     public Action OnPlayerDeathEvent;
-    
-    // When player succeed current stage
     public Action<RankType, float, int> OnStageClearEvent;
 
     // When player click clear UI buttons
@@ -23,6 +18,7 @@ public class StageManager : MonoBehaviour
     public Action OnRetryStageEvent;
     public Action OnPlayNextStageEvent;
 
+    // Return starge data
     public Func<float> GetTotalTimeFloat;
     public Func<int> GetCoinCountInt;
     public Func<RankType> GetCurrentFinalRankRankType;
@@ -40,7 +36,7 @@ public class StageManager : MonoBehaviour
         // Action
         OnInitStageEvent += InitStage;
         OnGetCoinEvent += UpdateScore;
-        OnPlayerDeathEvent += ResetStage;
+        OnPlayerDeathEvent += ResetStageWhenDied;
         OnStageClearEvent += EndStage;
 
         OnReturnToMainSceneEvent += ChangeToMainScene;
@@ -75,6 +71,17 @@ public class StageManager : MonoBehaviour
         _isLastStage = _stageIndex == _gameManager.StageDataList.Count - 1;
         
         Debug.Log($"INIT {_stageIndex} STAGE");
+    }
+    
+    private void ResetStageWhenDied()
+    {
+        StartCoroutine(CoResetStageWhenDied());
+    }
+    
+    private IEnumerator CoResetStageWhenDied()
+    {
+        yield return StartCoroutine(_gameManager.CameraManager.CoCameraShake());
+        ResetStage();
     }
     
     private void ResetStage()
@@ -134,7 +141,6 @@ public class StageManager : MonoBehaviour
 
     private void UpdateStageData()
     {
-        Debug.Log((int)_currentFinalRank < (int)_gameManager.StageDataList[_stageIndex].FinalRankType);
         if (_currentFinalRank < _gameManager.StageDataList[_stageIndex].FinalRankType)
         {
             return;

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public StageManager StageManager => Instance._stageManager;
     private StageManager _stageManager;
+    public CameraManager CameraManager => Instance._cameraManager;
+    private CameraManager _cameraManager;
     
     [Header("Action")]
     public Action<int> OnSelectStageEvent;
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _cameraManager = FindAnyObjectByType<CameraManager>();
         OnSelectStageEvent += LoadSceneWithIndex;
     }
 
