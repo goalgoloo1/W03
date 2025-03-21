@@ -25,7 +25,12 @@ public class PlayerGround : MonoBehaviour
         _onGround = Physics2D.Raycast(transform.position + _colliderOffset, Vector2.down, _groundLength, _groundLayer) || Physics2D.Raycast(transform.position - _colliderOffset, Vector2.down, _groundLength, _groundLayer);
         if (_onGround)
         {
-            _playerDash.HasDashed = false;
+            // 땅에서 대쉬를 하면 바로 HasDashed가 false 돼서 대쉬를 두번 할 수 있음.
+            // 아래 조건문으로 지금 대쉬중이 아님을 확인
+            if (!_playerDash.OnDash)
+            {
+                _playerDash.HasDashed = false;
+            }
             _playerDash.EndDash = false;
         }
     }

@@ -7,11 +7,11 @@ public class PlayerDash : MonoBehaviour
     Vector2 _velocity;
     PlayerMove _playerMove;
 
-    public bool HasDashed { get { return _hasDashed; } set { _hasDashed = value; } }
+    public bool HasDashed { get { return _hasDashed; } set { _hasDashed = value; } } // Dash를 이미 해서 Dash를 더 할 수 없는지
     bool _hasDashed;
-    public bool OnDash { get {  return _onDash; } set { _onDash = value; } }
+    public bool OnDash { get {  return _onDash; } set { _onDash = value; } } // Dash를 지금 하고 있는지
     bool _onDash;
-    public bool EndDash { get { return _endDash; } set { _endDash = value; } }
+    public bool EndDash { get { return _endDash; } set { _endDash = value; } } // Dash가 지금 끝났는지 (중력 높여주기 용)
     bool _endDash;
 
     [SerializeField] float _dashSpeed;
@@ -34,7 +34,7 @@ public class PlayerDash : MonoBehaviour
         if (!InputManager.Instance.CanMove || _hasDashed) return;
 
         Debug.Log("Dash!");
-        _hasDashed = true;
+        HasDashed = true;
         OnDash = true;
         StartCoroutine(CoDashWait());
         _rigid.linearVelocity = Vector2.zero;
