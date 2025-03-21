@@ -1328,6 +1328,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8183829989437068283, guid: 384aab271db0ded489ffb748f5d5e94e, type: 3}
+      propertyPath: _slideSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8183829989437068283, guid: 384aab271db0ded489ffb748f5d5e94e, type: 3}
       propertyPath: _climbDownSpeedModifier
       value: 2.3
       objectReference: {fileID: 0}

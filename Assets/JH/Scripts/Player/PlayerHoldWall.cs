@@ -11,7 +11,6 @@ public class PlayerHoldWall : MonoBehaviour
     [SerializeField] float _slideSpeed;
     [SerializeField] float _climbSpeed;
     [Tooltip("벽을 잡고 아래로 내려갈 때 더 빨라지게 하는 변수입니다.")] [SerializeField] float _climbDownSpeedModifier;
-    [SerializeField] float _slideInputThreshold;
 
     void Start()
     {
@@ -50,7 +49,7 @@ public class PlayerHoldWall : MonoBehaviour
     void WallSlide()
     {
         _velocity = _rigid.linearVelocity;
-        _velocity.y = -2;
+        _velocity.y = -_slideSpeed;
         _rigid.linearVelocity = _velocity;
     }
 

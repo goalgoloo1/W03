@@ -106,6 +106,7 @@ public class PlayerJump : MonoBehaviour
 
         // 붙은 벽의 반대편으로 점프하려고 할 시 Velocity의 X값 조정
         float side = 0;
+        
         //Debug.Log(InputManager.Instance.Move.x);
         if (_playerWall.OnLeftWall)
         {
@@ -115,6 +116,7 @@ public class PlayerJump : MonoBehaviour
             }
             else
             {
+
                 side = _wallStillJumpMultiplier;
             }
         }
@@ -147,9 +149,8 @@ public class PlayerJump : MonoBehaviour
             _jumpSpeed += Mathf.Abs(_rigid.linearVelocityY);
         }
 
-        _velocity.x += _wallJumpXSpeed * side;
+         _velocity.x += _wallJumpXSpeed * side;
         _velocity.y += _jumpSpeed;
-        Debug.Log(_velocity);
         _rigid.linearVelocity = _velocity * _wallJumpMultiplier;
 
         InputManager.Instance.Jump = false;
