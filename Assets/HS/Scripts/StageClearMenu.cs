@@ -32,9 +32,11 @@ public class StageClearMenu : MonoBehaviour
         //StageClearSequence(); PS: for Debugging
 
         FindUIObjects();
-        _cts = new CancellationTokenSource();
+        
         
         GameManager.Instance.StageManager.OnStageClearEvent += StageClearSequence;
+        
+        _cts = new CancellationTokenSource();
     }
 
     private void OnDestroy()
@@ -138,21 +140,39 @@ public class StageClearMenu : MonoBehaviour
 
     private void DisplayClearTime()
     {
+        if (_textClearTime == null)
+        {
+            return;
+        }
+        
         _textClearTime.gameObject.SetActive(true);
     }
 
     private void DisplayScore()
     {
+        if (_textScore == null)
+        {
+            return;
+        }
         _textScore.gameObject.SetActive(true);
     }
 
     private void DisplayRank()
     {
+        if (_textRank == null)
+        {
+            return;
+        }
+        
         _textRank.gameObject.SetActive(true);
     }
 
     private void DisplayButtons()
     {
+        if (_textRank == null || _textScore == null || _textClearTime == null)
+        {
+            return;
+        }
         _returnToMainSceneBtn.gameObject.SetActive(true);
         _retryBtn.gameObject.SetActive(true);
         _playNextStageBtn.gameObject.SetActive(true);
