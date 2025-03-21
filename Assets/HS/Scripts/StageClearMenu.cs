@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using TMPro;
 using System;
 using Enums;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StageClearMenu : MonoBehaviour
@@ -24,24 +23,19 @@ public class StageClearMenu : MonoBehaviour
     float _introPosX = 500; //px
     float _outroPosX = 1210; //PS: not used because no outro now.
     float _tweenDuration = 0.3f;
-    //HS->DE: I added this line to get the selected stage number. 
-    int _selectedStageNum = GameManager.Instance.SelectedStageNum; 
-
-
 
 
     private void Start()
     {
-
-        Debug.Log("{GameManager.Instance.StageManager}");
         //StageClearSequence(); PS: for Debugging
+
+        FindUIObjects();
         GameManager.Instance.StageManager.OnStageClearEvent += StageClearSequence;
     }
-
     
     private async void StageClearSequence(RankType type, float time, int coinCount)//RankType type, float time, int coinCount
     {
-        FindUIObjects();
+        
         ChangeClearUIText(type, time, coinCount);
 
         await Task.Delay(1000);
@@ -66,8 +60,11 @@ public class StageClearMenu : MonoBehaviour
     private void ChangeClearUIText(RankType type, float time, int coinCount)
     {
         _textRank.text = type.ToString();
-        _textScore.text = coinCount.ToString();
-        _textClearTime.text = time.ToString();
+        _textScore.text = $" COIN X {coinCount.ToString()}";
+        
+        var minutes = Mathf.FloorToInt(time / 60f);
+        var seconds = Mathf.FloorToInt(time % 60f);
+        _textClearTime.text = $"{minutes:00}:{seconds:00}";
     }
 
     private void FindUIObjects()
@@ -101,19 +98,20 @@ public class StageClearMenu : MonoBehaviour
 
     private void ReturnToMainSceneBtnClick()
     {
-        //HS->DE: I didn't know what does MainScene mean, so Please change this code to the correct scene.  
-        //HS->DE: MainScene이 6개 중 무엇을 의미하는지 모르겠습니다. 이 코드를 올바른 씬으로 변경부탁드립니다.
-        //GameManager.Instance.OnSelectStageEvent?.Invoke(0);
-        print("[HS->DE] Please change this code to the correct scene");
+        Debug.Log("@@DE ---> Click");
+        GameManager.Instance.StageManager.OnReturnToMainSceneEvent?.Invoke();
     }
     private void PlayNextStageBtnClick()
     {
-        GameManager.Instance.OnSelectStageEvent?.Invoke(_selectedStageNum+1);
+        Debug.Log("@@DE ---> Click");
+        GameManager.Instance.StageManager.OnPlayNextStageEvent?.Invoke();
     }
     private void RetryBtnClick()
     {
-        GameManager.Instance.OnSelectStageEvent?.Invoke(_selectedStageNum);
+        Debug.Log("@@DE ---> Click");
+        GameManager.Instance.StageManager.OnRetryStageEvent?.Invoke();
     }
+    
     private void ShowStageClearPanel()
     {
         _canvasGroup.DOFade(0.5f, _tweenDuration).SetUpdate(true);
