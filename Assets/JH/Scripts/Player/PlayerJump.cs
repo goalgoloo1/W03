@@ -6,6 +6,7 @@ public class PlayerJump : MonoBehaviour
 {
     PlayerGround _playerGround;
     PlayerWall _playerWall;
+    PlayerDash _playerDash;
     Rigidbody2D _rigid;
     Vector2 _velocity;
 
@@ -17,10 +18,18 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] float _timeToJumpApex;   // 최고 높은 곳으로 가기까지 걸리는 시간??? 공부필요함
     [SerializeField] float _upMoveMultiplier;
     [SerializeField] float _downMoveMultiplier;
+
+    [Header("벽 점프")]
     [SerializeField] float _wallJumpXSpeed;
     [SerializeField] float _wallJumpMultiplier;
     [SerializeField] float _wallStillJumpMultiplier;
+    [SerializeField] float _wallJumpCannotMoveDuration;
 
+    [Header("대쉬")]
+    [Tooltip("대쉬 후 땅에 닿거나 벽을 잡을 때 까지 높일 중력 값")] [SerializeField] float _endDashGravity;
+
+    [Header("기타")]
+    [SerializeField] float _speedLimit;
 
 
     // 아래는 계산시 사용되는 값을 건드리지 말아야할 변수
@@ -32,6 +41,7 @@ public class PlayerJump : MonoBehaviour
     {
         _playerGround = GetComponent<PlayerGround>();
         _playerWall = GetComponent<PlayerWall>();
+        _playerDash = GetComponent<PlayerDash>();
         _rigid = GetComponent<Rigidbody2D>();
         InputManager.Instance.OnJumpEvent += Jump;
     }
@@ -100,12 +110,13 @@ public class PlayerJump : MonoBehaviour
         /// 이부분 코드 맞는지 검토 필요
         ///
         StopCoroutine(DisableMovement(0));
-        StartCoroutine(DisableMovement(.1f));
+        StartCoroutine(DisableMovement(_wallJumpCannotMoveDuration));
 
         _velocity = _rigid.linearVelocity;
 
         // 붙은 벽의 반대편으로 점프하려고 할 시 Velocity의 X값 조정
         float side = 0;
+        
         //Debug.Log(InputManager.Instance.Move.x);
         if (_playerWall.OnLeftWall)
         {
@@ -115,6 +126,7 @@ public class PlayerJump : MonoBehaviour
             }
             else
             {
+
                 side = _wallStillJumpMultiplier;
             }
         }
@@ -147,9 +159,8 @@ public class PlayerJump : MonoBehaviour
             _jumpSpeed += Mathf.Abs(_rigid.linearVelocityY);
         }
 
-        _velocity.x += _wallJumpXSpeed * side;
+         _velocity.x += _wallJumpXSpeed * side;
         _velocity.y += _jumpSpeed;
-        Debug.Log(_velocity);
         _rigid.linearVelocity = _velocity * _wallJumpMultiplier;
 
         InputManager.Instance.Jump = false;
@@ -201,17 +212,30 @@ public class PlayerJump : MonoBehaviour
         {
             _gravityMultiplier = _defaultGravityScale;
         }
+        // y축의 속도가 너무 빠르거나 느리지 않게 제한
+        if (Mathf.Abs(_rigid.linearVelocityY) > 30)
+            print(_rigid.linearVelocityY);
+        _rigid.linearVelocityY = Mathf.Clamp(_rigid.linearVelocityY, -_speedLimit, _speedLimit);
     }
     
     void SetPhysics()
     {
-        // 플레이어가 공중에서 벽을 잡고 있을 때 중력 0
-        if (_playerWall.OnHoldWall && !_playerGround.OnGround)
+        // 플레이어가 공중에서 벽을 잡고 있을 때 중력 0 또는 대쉬중일 때 중력 0 
+        if ((_playerWall.OnHoldWall && !_playerGround.OnGround) || _playerDash.OnDash)
         {
             _rigid.gravityScale = 0;
             return;
         }
         float newGravity = -2 * (_jumpHeight) / (_timeToJumpApex * _timeToJumpApex);
-        _rigid.gravityScale = newGravity / Physics2D.gravity.y * _gravityMultiplier;
+
+        // Dash를 공중으로 하는 경우 너무 높이까지 가서 어색함. _endDashGravity로 땅에 닿거나 벽에 닿을 때 까지 중력을 높임
+        if (_playerDash.EndDash)
+        {
+            _rigid.gravityScale = _endDashGravity;
+        }
+        else
+        {
+            _rigid.gravityScale = newGravity / Physics2D.gravity.y * _gravityMultiplier;
+        }
     }
 }

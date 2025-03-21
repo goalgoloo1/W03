@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMove : MonoBehaviour
 {
     PlayerGround _playerGround;
@@ -9,6 +9,8 @@ public class PlayerMove : MonoBehaviour
     float _velocityX;
 
     bool _onGround;
+    public int Direction { get { return _direction; } set { _direction = value; } }
+    int _direction = 1;
     Vector2 move;
     float desiredX;
     
@@ -82,6 +84,10 @@ public class PlayerMove : MonoBehaviour
         //}
 
         //_velocityX = Mathf.MoveTowards(_velocityX, desiredX, _speedChange);
+        if (Mathf.Abs(desiredX) > Utility.SideInputThreshold)
+        {
+            Direction = (int)Mathf.Sign(desiredX);
+        }
         _velocityX = desiredX;
         _rigid.linearVelocityX = _velocityX;
     }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class InputManager : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class InputManager : MonoBehaviour
     public bool CanMove { get { return _canMove; } set { _canMove = value; } }
     bool _canMove = true;
 
+    public bool Dash { get { return _dash; } set { _dash = value; } }
+    bool _dash;
+
     private void Awake()
     {
         _instance = this;
@@ -40,5 +44,10 @@ public class InputManager : MonoBehaviour
     void OnHold(InputValue value)
     {
         _hold = value.isPressed;
+    }
+
+    void OnDash(InputValue value)
+    {
+        _dash = value.isPressed;
     }
 }

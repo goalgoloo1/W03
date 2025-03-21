@@ -5,18 +5,19 @@ public class PlayerHoldWall : MonoBehaviour
 {
     Rigidbody2D _rigid;
     PlayerWall _playerWall;
+    PlayerDash _playerDash;
     Vector2 _velocity;
 
     [Header("벽")]
     [SerializeField] float _slideSpeed;
     [SerializeField] float _climbSpeed;
     [Tooltip("벽을 잡고 아래로 내려갈 때 더 빨라지게 하는 변수입니다.")] [SerializeField] float _climbDownSpeedModifier;
-    [SerializeField] float _slideInputThreshold;
 
     void Start()
     {
         _rigid = GetComponent<Rigidbody2D>();
         _playerWall = GetComponent<PlayerWall>();
+        _playerDash = GetComponent<PlayerDash>();
     }
 
     void FixedUpdate()
@@ -49,15 +50,15 @@ public class PlayerHoldWall : MonoBehaviour
 
     void WallSlide()
     {
-        _velocity = _rigid.linearVelocity;
-        _velocity.y = -2;
-        _rigid.linearVelocity = _velocity;
+        //_velocity = _rigid.linearVelocity;
+        //_velocity.y = -_slideSpeed;
+        //_rigid.linearVelocity = _velocity;
     }
 
     void Hold()
     {
         if (!InputManager.Instance.CanMove) return;
-            
+        _playerDash.EndDash = false;
         _playerWall.OnHoldWall = true;
 
         _velocity = _rigid.linearVelocity;
