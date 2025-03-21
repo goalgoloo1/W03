@@ -121,7 +121,7 @@ public class StageManager : MonoBehaviour
 
     private RankType SetFinalRank(int coin)
     {
-        var finalRank = RankType.None;
+        var finalRank = RankType.Unranked;
         switch (coin)
         {
             case 0:
@@ -150,6 +150,7 @@ public class StageManager : MonoBehaviour
         
         _gameManager.StageDataList[_stageIndex].FinalRankType = _currentFinalRank;
         _gameManager.StageDataList[_stageIndex].FinalTotalTime = _totalTime;
+        _gameManager.StageDataList[_stageIndex].FinalCoinCount = _coinCount;
     }
     
     private float GetTotalTime()

@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public int SelectedStageNum { get; private set; }
     public List<StageData> StageDataList = new List<StageData>();
     
+    
     private void Awake()
     {
         if (Instance == null)
