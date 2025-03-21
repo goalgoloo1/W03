@@ -7,7 +7,7 @@ public class AutoMoveBlock : MonoBehaviour
 {
     Transform _startPoint;
     Transform _endPoint;
-    float _moveTime = 1f;
+    [SerializeField] float _moveTime = 1f;
     Coroutine _coMove;
 
     void Start()
