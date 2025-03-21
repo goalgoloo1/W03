@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using TMPro;
 using System;
+using System.Threading;
 using Enums;
 using UnityEngine.UI;
 
@@ -24,13 +25,22 @@ public class StageClearMenu : MonoBehaviour
     float _outroPosX = 1210; //PS: not used because no outro now.
     float _tweenDuration = 0.3f;
 
+    private CancellationTokenSource _cts;
 
     private void Start()
     {
         //StageClearSequence(); PS: for Debugging
 
         FindUIObjects();
+        _cts = new CancellationTokenSource();
+        
         GameManager.Instance.StageManager.OnStageClearEvent += StageClearSequence;
+    }
+
+    private void OnDestroy()
+    {
+        _cts?.Cancel();
+        GameManager.Instance.StageManager.OnStageClearEvent -= StageClearSequence;
     }
     
     private async void StageClearSequence(RankType type, float time, int coinCount)//RankType type, float time, int coinCount
@@ -98,17 +108,14 @@ public class StageClearMenu : MonoBehaviour
 
     private void ReturnToMainSceneBtnClick()
     {
-        Debug.Log("@@DE ---> Click");
         GameManager.Instance.StageManager.OnReturnToMainSceneEvent?.Invoke();
     }
     private void PlayNextStageBtnClick()
     {
-        Debug.Log("@@DE ---> Click");
         GameManager.Instance.StageManager.OnPlayNextStageEvent?.Invoke();
     }
     private void RetryBtnClick()
     {
-        Debug.Log("@@DE ---> Click");
         GameManager.Instance.StageManager.OnRetryStageEvent?.Invoke();
     }
     
@@ -128,6 +135,7 @@ public class StageClearMenu : MonoBehaviour
     //    _textClearTime.gameObject.SetActive(false);
     //    _textScore.gameObject.SetActive(false);
     //}
+
     private void DisplayClearTime()
     {
         _textClearTime.gameObject.SetActive(true);
