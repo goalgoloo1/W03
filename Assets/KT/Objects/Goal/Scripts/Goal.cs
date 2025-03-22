@@ -5,7 +5,7 @@ public class Goal : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        //if (collider.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
             RankType rank = GameManager.Instance.StageManager.GetCurrentFinalRankRankType();
             float timer = GameManager.Instance.StageManager.GetTotalTimeFloat();

@@ -30,6 +30,11 @@ public class InputManager : MonoBehaviour
         _instance = this;
     }
 
+    public void ActivateMovement(bool canMove)
+    {
+        _canMove = canMove;
+    }
+
     void OnMove(InputValue value)
     {
         _move = value.Get<Vector2>();

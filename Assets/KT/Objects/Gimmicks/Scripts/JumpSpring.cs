@@ -8,7 +8,7 @@ public class JumpSpring : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        //if (collision.transform.CompareTag("Player"))
+        if (collider.transform.CompareTag("Player"))
         {
             Rigidbody2D rigid = collider.transform.GetComponent<Rigidbody2D>();
             if (rigid != null)

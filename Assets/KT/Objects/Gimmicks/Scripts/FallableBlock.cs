@@ -18,8 +18,7 @@ public class FallableBlock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        //if (collider.transform.CompareTag("Player") && (_coFall == null))
-        if (_coFall == null)
+        if (collider.transform.CompareTag("Player") && (_coFall == null))
         {
             _coFall = StartCoroutine(CoFall());
         }
