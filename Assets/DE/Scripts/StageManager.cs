@@ -6,6 +6,7 @@ using Enums;
 public class StageManager : MonoBehaviour
 {
     private GameManager _gameManager;
+    private InputManager _inputManager;
     
     // When player 
     public Action OnInitStageEvent;
@@ -33,8 +34,12 @@ public class StageManager : MonoBehaviour
     
     private void Awake()
     {
+        _gameManager = GameManager.Instance;
+        _inputManager = InputManager.Instance;
+        
         // Action
         OnInitStageEvent += InitStage;
+        
         OnGetCoinEvent += UpdateScore;
         OnPlayerDeathEvent += ResetStageWhenDied;
         OnStageClearEvent += EndStage;
@@ -63,7 +68,6 @@ public class StageManager : MonoBehaviour
 
     private void InitStage()
     {
-        _gameManager = GameManager.Instance;
         _gameManager.ChangeStageManager(this);
 
         _stageIndex = _gameManager.SelectedStageNum;
@@ -73,6 +77,7 @@ public class StageManager : MonoBehaviour
         Debug.Log($"INIT {_stageIndex} STAGE");
 
         StartCoroutine(_gameManager.CameraManager.DeactivateTransitionImage());
+        _inputManager.ActivateMovement(true);
     }
     
     private void ResetStageWhenDied()
@@ -93,6 +98,7 @@ public class StageManager : MonoBehaviour
 
     private void EndStage(RankType type, float time, int coinCount)
     {
+        _inputManager.ActivateMovement(false);
         _isStageClear = true;
         UpdateStageData();
     }
