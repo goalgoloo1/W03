@@ -39,7 +39,7 @@ public class PlayerDash : MonoBehaviour
         _rigid.linearVelocity = Vector2.zero;
 
         // input 움직임 이 매우 적으면 마지막으로 바라본 좌우 방향으로 대쉬 사용
-        if (InputManager.Instance.Move.magnitude < Utility.SideInputThreshold)
+        if (InputManager.Instance.Move.magnitude < Utility.InputMagitudeThreshold)
         {
             _rigid.linearVelocity += new Vector2(_playerMove.Direction, 0) * _dashSpeed;
         }
