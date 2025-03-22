@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] Transform _exit; //출구
+    Transform _exit; //출구
 
     private void Start()
     {

@@ -6,18 +6,19 @@ public class JumpSpring : MonoBehaviour
 {
     [SerializeField] float _jumpPower = 50f;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         //if (collision.transform.CompareTag("Player"))
         {
-            Rigidbody2D rigid = collision.transform.GetComponent<Rigidbody2D>();
+            Rigidbody2D rigid = collider.transform.GetComponent<Rigidbody2D>();
             if (rigid != null)
             {
-                Vector2 dir = (collision.transform.position - transform.position).normalized;
+                Vector2 dir = (collider.transform.position - transform.position).normalized;
                 
                 Vector2 jumpDir = transform.up * _jumpPower;
-                //rigid.AddForce(jumpDir, ForceMode2D.Impulse);
-                rigid.linearVelocity += jumpDir;
+
+                //기존 물리량 덮어쓰기
+                rigid.linearVelocity = jumpDir;
             }
         }
     }
