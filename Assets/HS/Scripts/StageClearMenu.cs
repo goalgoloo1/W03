@@ -75,7 +75,7 @@ public class StageClearMenu : MonoBehaviour
         
         var minutes = Mathf.FloorToInt(time / 60f);
         var seconds = Mathf.FloorToInt(time % 60f);
-        _textClearTime.text = $"{minutes:00}:{seconds:00}";
+        _textClearTime.text = $"TIME: {minutes:00}:{seconds:00}";
     }
 
     private void FindUIObjects()
