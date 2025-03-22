@@ -23,6 +23,19 @@ public class MovableBlock : MonoBehaviour
         {
             _coMove = StartCoroutine(CoMove(_startPoint.localPosition, _endPoint.localPosition, _moveTime));
         }
+
+        if (collider.transform.parent == null)
+        {
+            collider.transform.SetParent(transform);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.transform.parent == transform)
+        {
+            collider.transform.SetParent(null);
+        }
     }
 
     IEnumerator CoMove(Vector3 start, Vector3 end, float moveTime)
