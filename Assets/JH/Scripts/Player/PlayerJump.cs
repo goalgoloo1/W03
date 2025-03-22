@@ -11,6 +11,8 @@ public class PlayerJump : MonoBehaviour
     Vector2 _velocity;
 
     bool _onGround;
+    public bool OnJump { get { return _onJump; } set { _onJump = value; } }
+    bool _onJump;
 
     // 아래는 조작감을 위해 조정해야할 변수
     [Header("점프")]
@@ -18,6 +20,7 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] float _timeToJumpApex;   // 최고 높은 곳으로 가기까지 걸리는 시간??? 공부필요함
     [SerializeField] float _upMoveMultiplier;
     [SerializeField] float _downMoveMultiplier;
+    [SerializeField] float _coyoteTime;
 
     [Header("벽 점프")]
     [SerializeField] float _wallJumpXSpeed;
@@ -36,6 +39,9 @@ public class PlayerJump : MonoBehaviour
     float _jumpSpeed;
     float _gravityMultiplier;
     float _defaultGravityScale = 1; // 예제는 Awake에서 선언했는데 그냥 선언해줘도 될듯?
+    float _coyoteTimeCounter = 0;
+
+    Coroutine _coDelayJumpfalse;
 
     void Start()
     {
@@ -48,6 +54,13 @@ public class PlayerJump : MonoBehaviour
     void Update()
     {
         _onGround = _playerGround.OnGround;
+        if (!OnJump && !_onGround && !_playerWall.OnWall && !_playerDash.HasDashed)
+        {
+            _coyoteTimeCounter += Time.deltaTime;
+        } else
+        {
+            _coyoteTimeCounter = 0;
+        }
     }
 
     void FixedUpdate()
@@ -57,13 +70,12 @@ public class PlayerJump : MonoBehaviour
         Jump();
     }
 
-    Coroutine _coDelayJumpfalse;
 
     // 버튼을 누를 때 점프하는 행동
     void Jump()
     {
-        // (땅에 있지 않고 벽에도 붙어있지 않는 )공중에 떠있는 경우 또는 점프를 누르지 않았는 경우
-        if ((!_onGround && !_playerWall.OnWall) || !InputManager.Instance.Jump)
+        // [(땅에 있지 않고 벽에도 붙어있지 않는)공중에 떠있는 경우 이면서 코요테 점프도 해당되지 않는 경우] 또는 점프를 누르지 않았는 경우 return 으로 종료
+        if ((!_onGround && !_playerWall.OnWall && (_coyoteTimeCounter < 0.03f || _coyoteTimeCounter > _coyoteTime)) || !InputManager.Instance.Jump || _playerDash.OnDash)
         {
             //InputManager.Instance.Jump = false;
             if (_coDelayJumpfalse == null)
@@ -76,7 +88,9 @@ public class PlayerJump : MonoBehaviour
 
         if (!InputManager.Instance.CanMove) return;
 
-        if (_playerWall.OnWall && !_onGround)
+        _coyoteTimeCounter = 0;
+        // 벽에 있고 땅에 닿아있지 않으며 코요테 점프가 아닌 경우 벽점프
+        if (_playerWall.OnWall && !_onGround && !(_coyoteTimeCounter > 0.03f && _coyoteTimeCounter < _coyoteTime) )
         {
             WallJump();
             return;
@@ -101,6 +115,7 @@ public class PlayerJump : MonoBehaviour
         _velocity.y += _jumpSpeed;
         _rigid.linearVelocityY = _velocity.y;
 
+        OnJump = true;
         InputManager.Instance.Jump = false;
     }
     
@@ -163,6 +178,7 @@ public class PlayerJump : MonoBehaviour
         _velocity.y += _jumpSpeed;
         _rigid.linearVelocity = _velocity * _wallJumpMultiplier;
 
+        OnJump = true;
         InputManager.Instance.Jump = false;
     }
 
@@ -210,6 +226,10 @@ public class PlayerJump : MonoBehaviour
         }
         else
         {
+            if (_onGround)
+            {
+                OnJump = false;
+            }
             _gravityMultiplier = _defaultGravityScale;
         }
         // y축의 속도가 너무 빠르거나 느리지 않게 제한

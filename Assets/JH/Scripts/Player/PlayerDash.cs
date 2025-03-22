@@ -33,7 +33,6 @@ public class PlayerDash : MonoBehaviour
         InputManager.Instance.Dash = false;
         if (!InputManager.Instance.CanMove || _hasDashed) return;
 
-        Debug.Log("Dash!");
         HasDashed = true;
         OnDash = true;
         StartCoroutine(CoDashWait());
