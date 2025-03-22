@@ -70,9 +70,8 @@ public class StageManager : MonoBehaviour
     {
         _gameManager.ChangeStageManager(this);
 
-        //_stageIndex = _gameManager.SelectedStageNum;
-        _stageIndex = 6;
-        _currentFinalRank = _gameManager.StageDataList[_stageIndex].FinalRankType;
+        _stageIndex = _gameManager.SelectedStageNum;
+        _currentFinalRank = RankType.BRank;
         _isLastStage = _stageIndex == _gameManager.StageDataList.Count - 1;
         
         Debug.Log($"INIT {_stageIndex} STAGE");
