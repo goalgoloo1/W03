@@ -10,6 +10,7 @@ public class BreakableBlock : MonoBehaviour
     
     Coroutine _coBreak;
     [SerializeField] float _breakDelay;
+    [SerializeField] float _respawnDelay;
 
     private void Start()
     {
@@ -17,9 +18,9 @@ public class BreakableBlock : MonoBehaviour
         _polygonColl = GetComponent<PolygonCollider2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        //if (collision.transform.CompareTag("Player") && (_coBreak == null))
+        //if (collider.transform.CompareTag("Player") && (_coBreak == null))
         if (_coBreak == null)
         {
             _coBreak = StartCoroutine(CoBreak());
@@ -34,7 +35,7 @@ public class BreakableBlock : MonoBehaviour
         _body.SetActive(false);
         //Debug.Log("break");
 
-        yield return new WaitForSeconds(_breakDelay);
+        yield return new WaitForSeconds(_respawnDelay);
         _polygonColl.enabled = true;
         _body.SetActive(true);
 

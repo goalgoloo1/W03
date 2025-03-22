@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class AutoMoveBlock : MonoBehaviour
 {
@@ -41,6 +40,22 @@ public class AutoMoveBlock : MonoBehaviour
 
             StopCoroutine(_coMove);
             _coMove = StartCoroutine(CoMove(_startPoint.localPosition, _endPoint.localPosition, _moveTime));
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.transform.parent == null)
+        {
+            collider.transform.SetParent(transform);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.transform.parent == transform)
+        {
+            collider.transform.SetParent(null);
         }
     }
 }
