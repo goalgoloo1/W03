@@ -11,7 +11,10 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Teleport(collider);
+        if (collider.CompareTag("Player"))
+        {
+            Teleport(collider);
+        }
     }
 
     void Teleport(Collider2D collider)
