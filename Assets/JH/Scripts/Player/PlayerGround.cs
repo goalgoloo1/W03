@@ -4,7 +4,7 @@ public class PlayerGround : MonoBehaviour
 {
     PlayerDash _playerDash;
 
-    Vector3 _colliderOffset = new Vector3(0.5f, 0);
+    Vector3 _colliderOffset = new Vector3(0.4f, 0);
     const int _groundLayer = 1 << 6;
     float _groundLength = 0.53f;
     public bool OnGround => _onGround;

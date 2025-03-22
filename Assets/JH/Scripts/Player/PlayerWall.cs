@@ -4,6 +4,7 @@ public class PlayerWall : MonoBehaviour
 {
     Vector3 _colliderOffset = new Vector3(0, 0.5f);
     const int _groundLayer = 1 << 6;
+    public float WallLength => _wallLength;
     float _wallLength = 0.7f;
     public bool OnWall => _onWall;
     bool _onWall;

@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
     PlayerGround _playerGround;
     PlayerWall _playerWall;
     Rigidbody2D _rigid;
+    SpriteRenderer _sprite;
     float _velocityX;
 
     bool _onGround;
@@ -40,6 +41,7 @@ public class PlayerMove : MonoBehaviour
         _playerGround = GetComponent<PlayerGround>();
         _playerWall = GetComponent<PlayerWall>();
         _rigid = GetComponent<Rigidbody2D>();
+        _sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -87,6 +89,7 @@ public class PlayerMove : MonoBehaviour
         if (Mathf.Abs(desiredX) > Utility.SideInputThreshold)
         {
             Direction = (int)Mathf.Sign(desiredX);
+            _sprite.flipX = Direction == 1 ? false : true;
         }
         _velocityX = desiredX;
         _rigid.linearVelocityX = _velocityX;
