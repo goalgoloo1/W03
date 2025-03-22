@@ -46,6 +46,11 @@ public class StageListManager : MonoBehaviour
         {
             return;
         }
+
+        if (_eventSystem.currentSelectedGameObject == null)
+        {
+            return;
+        }
         
         var selected = _eventSystem.currentSelectedGameObject.GetComponent<RectTransform>();
         UpdateScrollbarValue(selected);
