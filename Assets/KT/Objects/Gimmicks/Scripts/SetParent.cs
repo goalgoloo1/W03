@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class SetParent : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.transform.parent == null)
+        if (collider.transform.parent == null)
         {
-            collision.transform.SetParent(transform);
+            collider.transform.SetParent(transform);
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collider)
     {
-        if (collision.transform.parent == transform)
+        if (collider.transform.parent == transform)
         {
-            collision.transform.SetParent(null);
+            collider.transform.SetParent(null);
         }
     }
 }
