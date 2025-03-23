@@ -166,7 +166,9 @@ public class PlayerJump : MonoBehaviour
         // 올라가는 탈것 등에 있어서 y축으로 올라가고 있다면 그것을 뺀 만큼만 점프
         if (_velocity.y > 0f)
         {
-            _jumpSpeed = Mathf.Max(_jumpSpeed - _velocity.y, 0f);
+            print(_velocity.y);
+            //_jumpSpeed = Mathf.Max(_jumpSpeed + _velocity.y, 0f);
+            _jumpSpeed = Mathf.Max(_jumpSpeed + _velocity.y, 0f);
         }
         // 내려가는 탈것 등에 있어서 y축으로 내려가고 있다면 그것을 뺀 만큼만 점프
         else if (_velocity.y < 0f)
@@ -233,8 +235,8 @@ public class PlayerJump : MonoBehaviour
             _gravityMultiplier = _defaultGravityScale;
         }
         // y축의 속도가 너무 빠르거나 느리지 않게 제한
-        if (Mathf.Abs(_rigid.linearVelocityY) > 30)
-            print(_rigid.linearVelocityY);
+        //if (Mathf.Abs(_rigid.linearVelocityY) > 30)
+            //print(_rigid.linearVelocityY);
         _rigid.linearVelocityY = Mathf.Clamp(_rigid.linearVelocityY, -_speedLimit, _speedLimit);
     }
     

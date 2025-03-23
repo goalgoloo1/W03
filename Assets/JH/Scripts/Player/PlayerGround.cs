@@ -6,7 +6,8 @@ public class PlayerGround : MonoBehaviour
 
     Vector3 _colliderOffset = new Vector3(0.48f, 0);
     const int _groundLayer = 1 << 6;
-    float _groundLength = 0.53f;
+    //float _groundLength = 0.53f;
+    float _groundLength = 0.7f;
     public bool OnGround => _onGround;
     bool _onGround = true;
 
