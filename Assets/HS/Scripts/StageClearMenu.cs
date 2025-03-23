@@ -16,6 +16,8 @@ public class StageClearMenu : MonoBehaviour
     TextMeshProUGUI _textRank;
     TextMeshProUGUI _textScore;
     TextMeshProUGUI _textClearTime;
+    
+    Image _coinImg;
 
     Button _returnToMainSceneBtn;
     Button _retryBtn;
@@ -71,7 +73,7 @@ public class StageClearMenu : MonoBehaviour
     private void ChangeClearUIText(RankType type, float time, int coinCount)
     {
         _textRank.text = type.ToString();
-        _textScore.text = $" COIN X {coinCount.ToString()}";
+        _textScore.text = $": {coinCount.ToString()} / 3";
         
         var minutes = Mathf.FloorToInt(time / 60f);
         var seconds = Mathf.FloorToInt(time % 60f);
@@ -101,10 +103,14 @@ public class StageClearMenu : MonoBehaviour
 
         _retryBtn = GameObject.Find("RetryBtn").GetComponent<Button>();
         _retryBtn.gameObject.SetActive(false);
+        
+        _coinImg = GameObject.Find("CoinImg").GetComponent<Image>();
+        _coinImg.gameObject.SetActive(false);
 
         _returnToMainSceneBtn.onClick.AddListener(ReturnToMainSceneBtnClick);
         _playNextStageBtn.onClick.AddListener(PlayNextStageBtnClick);
         _retryBtn.onClick.AddListener(RetryBtnClick);
+        
     }
 
     private void ReturnToMainSceneBtnClick()
@@ -155,6 +161,7 @@ public class StageClearMenu : MonoBehaviour
             return;
         }
         _textScore.gameObject.SetActive(true);
+        _coinImg.gameObject.SetActive(true);
     }
 
     private void DisplayRank()
@@ -169,7 +176,7 @@ public class StageClearMenu : MonoBehaviour
 
     private void DisplayButtons()
     {
-        if (_textRank == null || _textScore == null || _textClearTime == null)
+        if (_textRank == null || _textScore == null || _textClearTime == null || _coinImg == null)
         {
             return;
         }

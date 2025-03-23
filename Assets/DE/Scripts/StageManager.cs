@@ -127,20 +127,20 @@ public class StageManager : MonoBehaviour
 
     private RankType SetFinalRank(int coin)
     {
-        var finalRank = RankType.Unranked;
+        var finalRank = RankType.UNRAKED;
         switch (coin)
         {
             case 0:
-                finalRank = RankType.BRank;
+                finalRank = RankType.B;
                 break;
             case 1:
-                finalRank = RankType.ARank;
+                finalRank = RankType.A;
                 break;
             case 2:
-                finalRank = RankType.SRank;
+                finalRank = RankType.S;
                 break;
             case 3:
-                finalRank = RankType.SSRank;
+                finalRank = RankType.SS;
                 break;
         }
         
