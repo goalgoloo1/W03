@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _normal: {fileID: 5072693727033645048, guid: 9972e37c07f4cbf478b9d755b53792ec, type: 3}
   _crack: {fileID: -5235122834686036688, guid: a2df0017a3efd8a4abfa4a072e1d296b, type: 3}
-  _breakDelay: 1
+  _breakDelay: 0.25
   _respawnDelay: 1
 --- !u!1 &5686102654382167473
 GameObject:

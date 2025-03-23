@@ -7,11 +7,17 @@ public class PlayerJump : MonoBehaviour
     PlayerGround _playerGround;
     PlayerWall _playerWall;
     PlayerDash _playerDash;
+    PlayerSprite _playerSprite;
     Rigidbody2D _rigid;
     Vector2 _velocity;
 
     bool _onGround;
-    public bool OnJump { get { return _onJump; } set { _onJump = value; } }
+    public bool OnJump { get { return _onJump; } 
+        set 
+        { 
+            _onJump = value;
+        }
+    }
     bool _onJump;
 
     // 아래는 조작감을 위해 조정해야할 변수
@@ -49,6 +55,7 @@ public class PlayerJump : MonoBehaviour
         _playerWall = GetComponent<PlayerWall>();
         _playerDash = GetComponent<PlayerDash>();
         _rigid = GetComponent<Rigidbody2D>();
+        _playerSprite = GetComponent<PlayerSprite>();
         InputManager.Instance.OnJumpEvent += Jump;
     }
     void Update()
@@ -89,6 +96,9 @@ public class PlayerJump : MonoBehaviour
         if (!InputManager.Instance.CanMove) return;
 
         _coyoteTimeCounter = 0;
+        // 점프하는 스프라이트로 전환
+        _playerSprite.SetSprite(ESprite.Jump);
+
         // 벽에 있고 땅에 닿아있지 않으며 코요테 점프가 아닌 경우 벽점프
         if (_playerWall.OnWall && !_onGround && !(_coyoteTimeCounter > 0.03f && _coyoteTimeCounter < _coyoteTime) )
         {
@@ -166,7 +176,9 @@ public class PlayerJump : MonoBehaviour
         // 올라가는 탈것 등에 있어서 y축으로 올라가고 있다면 그것을 뺀 만큼만 점프
         if (_velocity.y > 0f)
         {
-            _jumpSpeed = Mathf.Max(_jumpSpeed - _velocity.y, 0f);
+            print(_velocity.y);
+            //_jumpSpeed = Mathf.Max(_jumpSpeed + _velocity.y, 0f);
+            _jumpSpeed = Mathf.Max(_jumpSpeed + _velocity.y, 0f);
         }
         // 내려가는 탈것 등에 있어서 y축으로 내려가고 있다면 그것을 뺀 만큼만 점프
         else if (_velocity.y < 0f)
@@ -233,8 +245,8 @@ public class PlayerJump : MonoBehaviour
             _gravityMultiplier = _defaultGravityScale;
         }
         // y축의 속도가 너무 빠르거나 느리지 않게 제한
-        if (Mathf.Abs(_rigid.linearVelocityY) > 30)
-            print(_rigid.linearVelocityY);
+        //if (Mathf.Abs(_rigid.linearVelocityY) > 30)
+            //print(_rigid.linearVelocityY);
         _rigid.linearVelocityY = Mathf.Clamp(_rigid.linearVelocityY, -_speedLimit, _speedLimit);
     }
     
