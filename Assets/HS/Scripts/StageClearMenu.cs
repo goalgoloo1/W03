@@ -16,8 +16,9 @@ public class StageClearMenu : MonoBehaviour
     TextMeshProUGUI _textRank;
     TextMeshProUGUI _textScore;
     TextMeshProUGUI _textClearTime;
-    
-    Image _coinImg;
+
+     Image _coinImg;
+     Image _timeImg;
 
     Button _returnToMainSceneBtn;
     Button _retryBtn;
@@ -73,11 +74,11 @@ public class StageClearMenu : MonoBehaviour
     private void ChangeClearUIText(RankType type, float time, int coinCount)
     {
         _textRank.text = type.ToString();
-        _textScore.text = $": {coinCount.ToString()} / 3";
+        _textScore.text = $"{coinCount.ToString()} / 3";
         
         var minutes = Mathf.FloorToInt(time / 60f);
         var seconds = Mathf.FloorToInt(time % 60f);
-        _textClearTime.text = $"TIME: {minutes:00}:{seconds:00}";
+        _textClearTime.text = $"{minutes:00}:{seconds:00}";
     }
 
     private void FindUIObjects()
@@ -106,6 +107,9 @@ public class StageClearMenu : MonoBehaviour
         
         _coinImg = GameObject.Find("CoinImg").GetComponent<Image>();
         _coinImg.gameObject.SetActive(false);
+        
+        _timeImg = GameObject.Find("TimeImg").GetComponent<Image>();
+        _timeImg.gameObject.SetActive(false);
 
         _returnToMainSceneBtn.onClick.AddListener(ReturnToMainSceneBtnClick);
         _playNextStageBtn.onClick.AddListener(PlayNextStageBtnClick);
@@ -146,17 +150,18 @@ public class StageClearMenu : MonoBehaviour
 
     private void DisplayClearTime()
     {
-        if (_textClearTime == null)
+        if (_textClearTime == null || _timeImg == null)
         {
             return;
         }
         
         _textClearTime.gameObject.SetActive(true);
+        _timeImg.gameObject.SetActive(true);
     }
 
     private void DisplayScore()
     {
-        if (_textScore == null)
+        if (_textScore == null || _coinImg == null)
         {
             return;
         }
@@ -176,14 +181,14 @@ public class StageClearMenu : MonoBehaviour
 
     private void DisplayButtons()
     {
-        if (_textRank == null || _textScore == null || _textClearTime == null || _coinImg == null)
+        if (_textRank == null || _textScore == null || _textClearTime == null 
+            || _coinImg == null || _timeImg == null)
         {
             return;
         }
+
         _returnToMainSceneBtn.gameObject.SetActive(true);
         _retryBtn.gameObject.SetActive(true);
         _playNextStageBtn.gameObject.SetActive(true);
-
     }
-
 }
