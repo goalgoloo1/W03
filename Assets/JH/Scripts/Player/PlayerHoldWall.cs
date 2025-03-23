@@ -6,7 +6,7 @@ public class PlayerHoldWall : MonoBehaviour
     Rigidbody2D _rigid;
     PlayerWall _playerWall;
     PlayerDash _playerDash;
-    Vector2 _velocity;
+    float _velocityY;
 
     [Header("벽")]
     [SerializeField] float _slideSpeed;
@@ -36,16 +36,14 @@ public class PlayerHoldWall : MonoBehaviour
             Hold();
         }
         // 벽과 같은 방향으로 입력하고 있으면 벽에서 미끄러지기
-        //else
-        //{
-        //    _playerWall.OnHoldWall = false;
-        //    if ((_playerWall.OnLeftWall && InputManager.Instance.Move.x < -Utility.SideInputThreshold )|| (_playerWall.OnRightWall && InputManager.Instance.Move.x > Utility.SideInputThreshold))
-        //    {
-        //        WallSlide();
-        //    }
-        //}
-
-
+        else
+        {
+            _playerWall.OnHoldWall = false;
+            //    if ((_playerWall.OnLeftWall && InputManager.Instance.Move.x < -Utility.SideInputThreshold )|| (_playerWall.OnRightWall && InputManager.Instance.Move.x > Utility.SideInputThreshold))
+            //    {
+            //        WallSlide();
+            //    }
+        }
     }
 
     void WallSlide()
@@ -61,23 +59,18 @@ public class PlayerHoldWall : MonoBehaviour
         _playerDash.EndDash = false;
         _playerWall.OnHoldWall = true;
 
-        _velocity = _rigid.linearVelocity;
+        _velocityY = _rigid.linearVelocityY;
         float _desireY = InputManager.Instance.Move.y;
         float _speedModifier = _desireY > 0 ? 1 : _climbDownSpeedModifier;
-        _velocity.y = InputManager.Instance.Move.y * _climbSpeed * _speedModifier;
+        _velocityY = InputManager.Instance.Move.y * _climbSpeed * _speedModifier;
 
         // 벽면에 살짝 떨어져서 잡았을 때 붙게 만드는 함수
-        Ray ray = new Ray(transform.position, _playerWall.OnRightWall ? Vector2.right : Vector2.left);
-        if (Physics.Raycast(ray, _playerWall.WallLength))
-        {
+        //Ray ray = new Ray(transform.position, _playerWall.OnRightWall ? Vector2.right : Vector2.left);
+        //if (Physics.Raycast(ray, _playerWall.WallLength))
+        //{
 
-        }
-        
-
-
-
-
-        _rigid.linearVelocity = _velocity;
+        //}
+        _rigid.linearVelocityY = _velocityY;
         
     }
 }

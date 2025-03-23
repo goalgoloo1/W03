@@ -58,8 +58,10 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
+
         if (!InputManager.Instance.CanMove) return;
-        if (_playerWall.OnHoldWall) return;
+        //if (_playerWall.OnHoldWall) return;
+
         //_velocityX = _rigid.linearVelocityX;
 
         //_acceleration = _onGround ? _groundAcceleration : _airAcceleration;
