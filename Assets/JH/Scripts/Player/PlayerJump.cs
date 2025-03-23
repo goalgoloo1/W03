@@ -7,11 +7,17 @@ public class PlayerJump : MonoBehaviour
     PlayerGround _playerGround;
     PlayerWall _playerWall;
     PlayerDash _playerDash;
+    PlayerSprite _playerSprite;
     Rigidbody2D _rigid;
     Vector2 _velocity;
 
     bool _onGround;
-    public bool OnJump { get { return _onJump; } set { _onJump = value; } }
+    public bool OnJump { get { return _onJump; } 
+        set 
+        { 
+            _onJump = value;
+        }
+    }
     bool _onJump;
 
     // 아래는 조작감을 위해 조정해야할 변수
@@ -49,6 +55,7 @@ public class PlayerJump : MonoBehaviour
         _playerWall = GetComponent<PlayerWall>();
         _playerDash = GetComponent<PlayerDash>();
         _rigid = GetComponent<Rigidbody2D>();
+        _playerSprite = GetComponent<PlayerSprite>();
         InputManager.Instance.OnJumpEvent += Jump;
     }
     void Update()
@@ -89,6 +96,9 @@ public class PlayerJump : MonoBehaviour
         if (!InputManager.Instance.CanMove) return;
 
         _coyoteTimeCounter = 0;
+        // 점프하는 스프라이트로 전환
+        _playerSprite.SetSprite(ESprite.Jump);
+
         // 벽에 있고 땅에 닿아있지 않으며 코요테 점프가 아닌 경우 벽점프
         if (_playerWall.OnWall && !_onGround && !(_coyoteTimeCounter > 0.03f && _coyoteTimeCounter < _coyoteTime) )
         {

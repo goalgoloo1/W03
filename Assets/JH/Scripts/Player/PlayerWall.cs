@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerWall : MonoBehaviour
 {
+    PlayerSprite _playerSprite;
     Vector3 _colliderOffset = new Vector3(0, 0.5f);
     const int _groundLayer = 1 << 6;
     public float WallLength => _wallLength;
@@ -12,8 +13,22 @@ public class PlayerWall : MonoBehaviour
     bool _onLeftWall;
     public bool OnRightWall => _onRightWall;
     bool _onRightWall;
-    public bool OnHoldWall { get { return _onHoldWall; } set { _onHoldWall = value; } }
+    public bool OnHoldWall { get { return _onHoldWall; } 
+        set 
+        { 
+            _onHoldWall = value;
+            if (_onHoldWall)
+            {
+                _playerSprite.SetSprite(ESprite.Idle);
+            }
+        } 
+    }
     bool _onHoldWall;
+
+    private void Start()
+    {
+        _playerSprite = GetComponent<PlayerSprite>();
+    }
 
     void Update()
     {
