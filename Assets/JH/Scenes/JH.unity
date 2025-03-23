@@ -693,6 +693,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Auto Move Block
       objectReference: {fileID: 0}
+    - target: {fileID: 3379968254603577943, guid: c83b3cc091b9eef4c8482326a8544f38, type: 3}
+      propertyPath: _moveTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6182935432797584233, guid: c83b3cc091b9eef4c8482326a8544f38, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -707,7 +711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6182935432797584233, guid: c83b3cc091b9eef4c8482326a8544f38, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.5
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 6182935432797584233, guid: c83b3cc091b9eef4c8482326a8544f38, type: 3}
       propertyPath: m_LocalPosition.z
@@ -740,6 +744,14 @@ PrefabInstance:
     - target: {fileID: 6182935432797584233, guid: c83b3cc091b9eef4c8482326a8544f38, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567743660029736626, guid: c83b3cc091b9eef4c8482326a8544f38, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567743660029736626, guid: c83b3cc091b9eef4c8482326a8544f38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1033,63 +1045,6 @@ PrefabInstance:
     - target: {fileID: 8905607492363962558, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
       propertyPath: m_Name
       value: Block (6)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
---- !u!1001 &1452656285
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6069288243645171989, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905607492363962558, guid: c7be455a9ee49e140b16aab2cca970b3, type: 3}
-      propertyPath: m_Name
-      value: Block (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1397,7 +1352,6 @@ SceneRoots:
   - {fileID: 902175809}
   - {fileID: 134017695}
   - {fileID: 286996821}
-  - {fileID: 1452656285}
   - {fileID: 1044612943}
   - {fileID: 1692032381}
   - {fileID: 74258504}

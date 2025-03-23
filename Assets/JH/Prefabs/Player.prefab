@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7445602573375806299}
   - component: {fileID: 8183829989437068283}
   - component: {fileID: 8127002941120342276}
+  - component: {fileID: 2585190492552153937}
   - component: {fileID: 9162179392412643973}
   m_Layer: 3
   m_Name: Player
@@ -267,6 +268,22 @@ MonoBehaviour:
   - {r: 0.35686275, g: 0.43137255, b: 0.88235295, a: 1}
   _dashSpeed: 19
   _dashCoolDown: 0.15
+--- !u!114 &2585190492552153937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159072696960163986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b866310f055c6a649bfeffe7b97c2698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sprite:
+  - {fileID: -5806237980167934948, guid: 670823e8d703c95499b7f143aaacbd03, type: 3}
+  - {fileID: -1963820053419216957, guid: 335eda5d3107f85418010567566edb92, type: 3}
+  - {fileID: 8840079145967718594, guid: dd3e87ba8c290414f83ab181ca2dbce8, type: 3}
 --- !u!96 &9162179392412643973
 TrailRenderer:
   serializedVersion: 3
@@ -312,7 +329,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Time: 0.1
+  m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -329,6 +346,15 @@ TrailRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0.8220339
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
