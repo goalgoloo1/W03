@@ -73,7 +73,7 @@ public class StageManager : MonoBehaviour
 
         _stageIndex = _gameManager.SelectedStageNum;
         _finalRank = _gameManager.StageDataList[_stageIndex].FinalRankType;
-        _currentFinalRank = RankType.UNRAKED;
+        _currentFinalRank = RankType.UNRANKED;
         _isLastStage = _stageIndex == _gameManager.StageDataList.Count - 1;
         
         Debug.Log($"INIT {_stageIndex} STAGE");
@@ -129,7 +129,7 @@ public class StageManager : MonoBehaviour
 
     private RankType SetFinalRank(int coin)
     {
-        var finalRank = RankType.UNRAKED;
+        var finalRank = RankType.UNRANKED;
         switch (coin)
         {
             case 0:
