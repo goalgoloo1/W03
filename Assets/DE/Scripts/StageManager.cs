@@ -30,6 +30,7 @@ public class StageManager : MonoBehaviour
     private float _totalTime = 0;
     private int _coinCount = 0;
     private RankType _currentFinalRank;
+    private RankType _finalRank;
     private bool _isLastStage;
     
     private void Awake()
@@ -71,7 +72,8 @@ public class StageManager : MonoBehaviour
         _gameManager.ChangeStageManager(this);
 
         _stageIndex = _gameManager.SelectedStageNum;
-        _currentFinalRank = _gameManager.StageDataList[_stageIndex].FinalRankType;
+        _finalRank = _gameManager.StageDataList[_stageIndex].FinalRankType;
+        _currentFinalRank = RankType.UNRAKED;
         _isLastStage = _stageIndex == _gameManager.StageDataList.Count - 1;
         
         Debug.Log($"INIT {_stageIndex} STAGE");
@@ -149,7 +151,7 @@ public class StageManager : MonoBehaviour
 
     private void UpdateStageData()
     {
-        if (_currentFinalRank < _gameManager.StageDataList[_stageIndex].FinalRankType)
+        if (_currentFinalRank < _finalRank)
         {
             return;
         }
