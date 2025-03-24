@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5c010435de36a7d489b5a373fa0a29a8
+guid: 6a34f619039b3864c9d07a342d1b5088
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2665975790204399346
-    second: Connecting symbol_0
+      213: 4739734133071874972
+    second: gamepad_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Connecting symbol_0
+      name: gamepad_0
       rect:
         serializedVersion: 2
-        x: 41
-        y: 40
-        width: 47
-        height: 47
+        x: 0
+        y: 84
+        width: 512
+        height: 344
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e01531dc42d800bd0800000000000000
-      internalID: -2665975790204399346
+      spriteID: c9b0b83f41be6c140800000000000000
+      internalID: 4739734133071874972
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Connecting symbol_0: -2665975790204399346
+      gamepad_0: 4739734133071874972
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
