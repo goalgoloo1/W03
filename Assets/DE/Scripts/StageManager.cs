@@ -36,14 +36,14 @@ public class StageManager : MonoBehaviour
     private void Awake()
     {
         _gameManager = GameManager.Instance;
-        _inputManager = InputManager.Instance;
+        
         
         // Action
         OnInitStageEvent += InitStage;
         
         OnGetCoinEvent += UpdateScore;
         OnPlayerDeathEvent += ResetStageWhenDied;
-        OnStageClearEvent += EndStage;
+        
 
         OnReturnToMainSceneEvent += ChangeToMainScene;
         OnRetryStageEvent += ResetStage;
@@ -57,7 +57,14 @@ public class StageManager : MonoBehaviour
         // Initialize stage
         OnInitStageEvent?.Invoke();
     }
-    
+
+    private void Start()
+    {
+        _inputManager = InputManager.Instance;
+        OnStageClearEvent += EndStage;
+        _inputManager.ActivateMovement(true);
+    }
+
     private void Update()
     {
         // Start timer
@@ -79,7 +86,6 @@ public class StageManager : MonoBehaviour
         Debug.Log($"INIT {_stageIndex} STAGE");
 
         StartCoroutine(_gameManager.CameraManager.DeactivateTransitionImage());
-        _inputManager.ActivateMovement(true);
     }
     
     private void ResetStageWhenDied()
