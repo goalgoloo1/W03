@@ -11,7 +11,6 @@ public class PlayerSprite : MonoBehaviour
 
     public void SetSprite(ESprite sprite)
     {
-        print($"SetSprite {(int)sprite}");
         _spriteRenderer.sprite = _sprite[(int)sprite];
     }
 

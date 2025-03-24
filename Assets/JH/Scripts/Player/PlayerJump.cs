@@ -177,8 +177,7 @@ public class PlayerJump : MonoBehaviour
         if (_velocity.y > 0f)
         {
             print(_velocity.y);
-            //_jumpSpeed = Mathf.Max(_jumpSpeed + _velocity.y, 0f);
-            _jumpSpeed = Mathf.Max(_jumpSpeed + _velocity.y, 0f);
+            _jumpSpeed = Mathf.Max(_jumpSpeed - _velocity.y, 0f);
         }
         // 내려가는 탈것 등에 있어서 y축으로 내려가고 있다면 그것을 뺀 만큼만 점프
         else if (_velocity.y < 0f)
