@@ -746,11 +746,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9093373930411230193, guid: 1c14ccc3611ce4d4e84013d9db674cfe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.216509
+      value: 20.72
       objectReference: {fileID: 0}
     - target: {fileID: 9093373930411230193, guid: 1c14ccc3611ce4d4e84013d9db674cfe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.430022
+      value: 13.47
       objectReference: {fileID: 0}
     - target: {fileID: 9093373930411230193, guid: 1c14ccc3611ce4d4e84013d9db674cfe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2012,6 +2012,7 @@ PrefabInstance:
     - {fileID: 8936244820824596271, guid: 6484c6961e77a844a84aa0ed61b943d8, type: 3}
     - {fileID: 7978065960014792342, guid: 6484c6961e77a844a84aa0ed61b943d8, type: 3}
     - {fileID: 5344993945082251134, guid: 6484c6961e77a844a84aa0ed61b943d8, type: 3}
+    - {fileID: 4670356476139920994, guid: 6484c6961e77a844a84aa0ed61b943d8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6484c6961e77a844a84aa0ed61b943d8, type: 3}
@@ -2088,7 +2089,10 @@ PrefabInstance:
       value: Thorn Ground (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8936244820824596271, guid: 6484c6961e77a844a84aa0ed61b943d8, type: 3}
+    - {fileID: 5344993945082251134, guid: 6484c6961e77a844a84aa0ed61b943d8, type: 3}
+    - {fileID: 7978065960014792342, guid: 6484c6961e77a844a84aa0ed61b943d8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6484c6961e77a844a84aa0ed61b943d8, type: 3}
