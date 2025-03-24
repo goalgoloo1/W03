@@ -2226,7 +2226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1356698536}
   m_Layer: 5
-  m_Name: GamePad (1)
+  m_Name: Keyboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
