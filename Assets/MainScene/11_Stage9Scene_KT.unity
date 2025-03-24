@@ -860,7 +860,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 485897105485626383, guid: ac6bb06b18c5f124fb3b315c0908b91b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 485897105485626383, guid: ac6bb06b18c5f124fb3b315c0908b91b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -906,6 +906,14 @@ PrefabInstance:
       propertyPath: _moveTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3456587067316939983, guid: ac6bb06b18c5f124fb3b315c0908b91b, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3456587067316939983, guid: ac6bb06b18c5f124fb3b315c0908b91b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3922791479101645702, guid: ac6bb06b18c5f124fb3b315c0908b91b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -914,6 +922,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 22
       objectReference: {fileID: 0}
+    - target: {fileID: 5586907402747082408, guid: ac6bb06b18c5f124fb3b315c0908b91b, type: 3}
+      propertyPath: m_Size.x
+      value: 3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6114735014779108557, guid: ac6bb06b18c5f124fb3b315c0908b91b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1100442596900479678, guid: 5f722cfff652c384eaeeb901d012ae0e, type: 3}
     - target: {fileID: 7370810347266271401, guid: ac6bb06b18c5f124fb3b315c0908b91b, type: 3}
       propertyPath: m_Name
       value: Movable Block
