@@ -230,7 +230,7 @@ MonoBehaviour:
   _upMoveMultiplier: 1
   _downMoveMultiplier: 1.25
   _coyoteTime: 0.1
-  _wallJumpHeight: 3
+  _wallJumpHeight: 10
   _wallJumpXSpeed: 15
   _wallStillJumpMultiplier: 0
   _wallJumpCannotMoveDuration: 0.15

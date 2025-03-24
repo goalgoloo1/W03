@@ -137,6 +137,9 @@ public class PlayerJump : MonoBehaviour
         StopCoroutine(DisableMovement(0));
         StartCoroutine(DisableMovement(_wallJumpCannotMoveDuration));
 
+        _playerWall.OnHoldWall = false;
+        _rigid.gravityScale = 0;
+
         _velocity = _rigid.linearVelocity;
 
         // 붙은 벽의 반대편으로 점프하려고 할 시 Velocity의 X값 조정
@@ -184,18 +187,19 @@ public class PlayerJump : MonoBehaviour
         }
 
         // Velocity의 Y값 조정
-        _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * _rigid.gravityScale * _wallJumpHeight);
+        //_jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * _rigid.gravityScale * _wallJumpHeight);
+        _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y  * _wallJumpHeight);
         // 올라가는 탈것 등에 있어서 y축으로 올라가고 있다면 그것을 뺀 만큼만 점프
         if (_velocity.y > 0f)
         {
-            print(_velocity.y);
             _jumpSpeed = Mathf.Max(_jumpSpeed - _velocity.y, 0f);
+            print(_velocity.y);
         }
         // 내려가는 탈것 등에 있어서 y축으로 내려가고 있다면 그것을 뺀 만큼만 점프
-        else if (_velocity.y < 0f)
-        {
-            _jumpSpeed += Mathf.Abs(_rigid.linearVelocityY);
-        }
+        //else if (_velocity.y < 0f)
+        //{
+        //    _jumpSpeed += Mathf.Abs(_rigid.linearVelocityY);
+        //}
 
         _velocity.y += _jumpSpeed;
         _velocity.x += _wallJumpXSpeed * side;

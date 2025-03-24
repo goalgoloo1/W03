@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,7 @@ public class PlayerHoldWall : MonoBehaviour
     Rigidbody2D _rigid;
     PlayerWall _playerWall;
     PlayerDash _playerDash;
-    float _velocityY;
+    Vector2 _velocity;
 
     [Header("벽")]
     [SerializeField] float _slideSpeed;
@@ -28,8 +29,6 @@ public class PlayerHoldWall : MonoBehaviour
             _playerWall.OnHoldWall = false;
             return;
         }
-
-        
 
         if (InputManager.Instance.Hold)
         {
@@ -59,10 +58,13 @@ public class PlayerHoldWall : MonoBehaviour
         _playerDash.EndDash = false;
         _playerWall.OnHoldWall = true;
 
-        _velocityY = _rigid.linearVelocityY;
+        _velocity = _rigid.linearVelocity;
+
+        // 벽을 잡았을 때 좌우로 점점 멀어지면서 떨어지는 버그 방지
+        _velocity.x = 0;
         float _desireY = InputManager.Instance.Move.y;
         float _speedModifier = _desireY > 0 ? 1 : _climbDownSpeedModifier;
-        _velocityY = InputManager.Instance.Move.y * _climbSpeed * _speedModifier;
+        _velocity.y = InputManager.Instance.Move.y * _climbSpeed * _speedModifier;
 
         // 벽면에 살짝 떨어져서 잡았을 때 붙게 만드는 함수
         //Ray ray = new Ray(transform.position, _playerWall.OnRightWall ? Vector2.right : Vector2.left);
@@ -70,7 +72,16 @@ public class PlayerHoldWall : MonoBehaviour
         //{
 
         //}
-        _rigid.linearVelocityY = _velocityY;
-        
+        _rigid.linearVelocity = _velocity;
     }
+
+    //public void HoldOff()
+    //{
+    //    _playerWall.OnHoldWall = false;
+    //}
+
+    //IEnumerator CoEndHold()
+    //{
+
+    //}
 }
