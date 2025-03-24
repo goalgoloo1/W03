@@ -29,8 +29,8 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] float _coyoteTime;
 
     [Header("벽 점프")]
+    [SerializeField] float _wallJumpHeight;
     [SerializeField] float _wallJumpXSpeed;
-    [SerializeField] float _wallJumpMultiplier;
     [SerializeField] float _wallStillJumpMultiplier;
     [SerializeField] float _wallJumpCannotMoveDuration;
 
@@ -141,30 +141,42 @@ public class PlayerJump : MonoBehaviour
 
         // 붙은 벽의 반대편으로 점프하려고 할 시 Velocity의 X값 조정
         float side = 0;
-        
+
         //Debug.Log(InputManager.Instance.Move.x);
+        //if (_playerWall.OnLeftWall)
+        //{
+        //    if (InputManager.Instance.Move.x > Utility.SideInputThreshold)
+        //    {
+        //        side = 1;
+        //    }
+        //    else
+        //    {
+
+        //        side = _wallStillJumpMultiplier;
+        //    }
+        //}
+        //else if (_playerWall.OnRightWall)
+        //{
+        //    if (InputManager.Instance.Move.x < -Utility.SideInputThreshold)
+        //    {
+        //        side = -1;
+        //    }
+        //    else
+        //    {
+        //        side = -_wallStillJumpMultiplier;
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogError("Wall Jump인데 Left Wall, Right Wall 모두 False");
+        //}
         if (_playerWall.OnLeftWall)
         {
-            if (InputManager.Instance.Move.x > Utility.SideInputThreshold)
-            {
-                side = 1;
-            }
-            else
-            {
-
-                side = _wallStillJumpMultiplier;
-            }
+            side = 1;
         }
         else if (_playerWall.OnRightWall)
         {
-            if (InputManager.Instance.Move.x < -Utility.SideInputThreshold)
-            {
-                side = -1;
-            }
-            else
-            {
-                side = -_wallStillJumpMultiplier;
-            }
+            side = -1;
         }
         else
         {
@@ -172,7 +184,7 @@ public class PlayerJump : MonoBehaviour
         }
 
         // Velocity의 Y값 조정
-        _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * _rigid.gravityScale * _jumpHeight);
+        _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * _rigid.gravityScale * _wallJumpHeight);
         // 올라가는 탈것 등에 있어서 y축으로 올라가고 있다면 그것을 뺀 만큼만 점프
         if (_velocity.y > 0f)
         {
@@ -185,9 +197,9 @@ public class PlayerJump : MonoBehaviour
             _jumpSpeed += Mathf.Abs(_rigid.linearVelocityY);
         }
 
-         _velocity.x += _wallJumpXSpeed * side;
         _velocity.y += _jumpSpeed;
-        _rigid.linearVelocity = _velocity * _wallJumpMultiplier;
+        _velocity.x += _wallJumpXSpeed * side;
+        _rigid.linearVelocity = _velocity;
 
         OnJump = true;
         InputManager.Instance.Jump = false;
