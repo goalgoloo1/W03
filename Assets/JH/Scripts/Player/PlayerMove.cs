@@ -61,7 +61,7 @@ public class PlayerMove : MonoBehaviour
     {
 
         if (!InputManager.Instance.CanMove) return;
-        //if (_playerWall.OnHoldWall) return;
+        if (_playerWall.OnHoldWall) return;
 
         //_velocityX = _rigid.linearVelocityX;
 
